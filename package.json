@@ -2,10 +2,10 @@
   "name": "parcel-project-template",
   "version": "1.1.0",
   "description": "",
-  "homepage": "https://BanShuit.github.io/Flower-studio-grupa-6/",
+  "homepage": "https://BanShuit.github.io/Projek-IT/",
   "scripts": {
-    "build": "parcel build src/*.html --public-url /Flower-studio-grupa-6/",
-    "dev": "parcel src/*.html --public-url /Flower-studio-grupa-6/"
+    "build": "parcel build src/*.html --public-url /Projek-IT/",
+    "dev": "parcel src/*.html --public-url /Projek-IT/"
   },
   "repository": {
     "type": "git",
