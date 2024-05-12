@@ -1,0 +1,26 @@
+@media screen and (min-width: 1157px) {
+    .cards-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px 16px;
+        margin: 60px 30px;
+    }
+}
+
+@media screen and (min-width: 768px)and (max-width: 1157px) {
+    .cards-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px 32px;
+        margin: 60px 32px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .cards-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px 32px;
+        margin: 20px 20px 40px;
+    }
+}
