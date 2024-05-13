@@ -125,10 +125,10 @@ export function getGenres(genre_ids) {
 const homeButton = document.querySelector('button#search-button');
 const gallery = document.querySelector('ul#cards-list');
 
-homeButton.addEventListener('click', ev => {
-  pageNumber = 1;
-  getMostPopularMovies(pageNumber);
-});
+// homeButton.addEventListener('click', ev => {
+//   pageNumber = 1;
+//   getMostPopularMovies(pageNumber);
+// });
 
 //Functions
 function getMostPopularMovies(pageNumber) {
@@ -191,3 +191,37 @@ function renderMovies(dataMovies) {
   gallery.insertAdjacentHTML('beforeend', filmsList);
 }
 // -------------KonradKonik End
+
+// MartaMajnusz - wyszukiwarka (F10)
+import { searchMovies, fetchGenresList, createCards } from './scripts/search.js';
+
+const search = document.querySelector('.search-form');
+const cardsList = document.querySelector('ul#cards-list');
+let lastSearchTerm;
+
+search.addEventListener('submit', async ev => {
+  ev.preventDefault();
+  cardsList.innerHTML = ` `;
+  const warning = document.querySelector(`p.warning`);
+  const searchTerm = ev.currentTarget.elements.searchQuery.value;
+  lastSearchTerm = searchTerm;
+
+  try {
+    const data = await searchMovies(lastSearchTerm);
+    const dataMovies = data.results;
+    const genresList = await fetchGenresList();
+
+    if (searchTerm === lastSearchTerm) {
+      if (data.results.length === 0) {
+        console.log(`Nie znaleziono filmów`);
+        warning.innerText = `Search result not successful. Enter the correct movie name and`;
+      } else {
+        createCards(dataMovies, genresList);
+      }
+    }
+  } catch (error) {
+    console.error('Wystąpił błąd:', error);
+  }
+});
+
+// Marta - koniec
