@@ -5,5 +5,16 @@
 
 // Style dla pliku z przykładem HTML fragmentu
 @import '/src/css/footer.css';
-@import '/src/css/header.css';
+@import '/src/css/headers.css';
 @import '/src/css/hero.css';
+
+:root {
+  --font-family: 'Roboto', sans-serif;
+  --color-red: #ff001b;
+  --color-orange: #ff6b01;
+  --color-white: #fff;
+}
+
+* {
+  font-family: var(--font-family);
+}
