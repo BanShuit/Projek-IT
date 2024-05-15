@@ -10,6 +10,19 @@ const AXIOS_AUTHORIZATION =
   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YmI4OTQ0OTRjMWE3MDc2MTg2NDhiOTE2NGYzOTNjMiIsInN1YiI6IjVlZDdiZmY3ZTRiNTc2MDAyMDM3NjYzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kRGs0WRoomKwYXT7Mt8PNU2Zk6kAVasud5CyVVdf2mA';
 //Axios header - api key
 axios.defaults.headers.common['Authorization'] = AXIOS_AUTHORIZATION;
+// Loader - klaudia
+
+const loader = document.getElementById('loader');
+
+function showLoader() {
+  loader.style.display = 'block';
+}
+
+function hideLoader() {
+  loader.style.display = 'none';
+}
+
+hideLoader(); // Ukrycie loadera na początku
 
 export async function getMostPopularMoviesTmdbApi(currentPage) {
   const searchParams = new URLSearchParams({
