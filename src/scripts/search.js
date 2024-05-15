@@ -17,12 +17,15 @@ export async function fetchGenresList() {
 // ----------------------------------------------------------------------------
 // wyszukiwarka
 export async function searchMovies(searchTerm) {
-  const encodedSearchTerm = encodeURIComponent(searchTerm);
-  const url = `https://api.themoviedb.org/3/search/movie?query=${encodedSearchTerm}&api_key=d45c591dd3ef2fb9c22b9964b5ee2547`;
   try {
+    showLoader(); // Wyświetlenie loadera przed wyszukaniem filmów
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+    const url = `https://api.themoviedb.org/3/search/movie?query=${encodedSearchTerm}&api_key=d45c591dd3ef2fb9c22b9964b5ee2547`;
     const response = await axios.get(url);
+    hideLoader(); // Ukrycie loadera po otrzymaniu odpowiedzi
     return response.data;
   } catch (error) {
+    hideLoader(); // Ukrycie loadera w przypadku błędu
     console.error('Wystąpił błąd podczas wyszukiwania:', error);
     throw error;
   }
