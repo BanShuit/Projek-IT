@@ -12,7 +12,7 @@ const AXIOS_AUTHORIZATION =
 axios.defaults.headers.common['Authorization'] = AXIOS_AUTHORIZATION;
 // Loader - klaudia
 
-const loader = document.getElementById('loader');
+const loader = document.querySelector('.loader');
 
 function showLoader() {
   loader.style.display = 'block';
