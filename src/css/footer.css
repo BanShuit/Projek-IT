@@ -1,0 +1,99 @@
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1158px;
+    margin: 0 auto;
+}
+
+.page-footer {
+    background-color: #F7F7F7;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer-text {
+    line-height: 1.6;
+    font-size: 14px;
+    color: #545454;
+    max-width: 264px;
+    text-align: center;
+    letter-spacing: 0.03em;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-footer {
+    margin: auto;
+}
+
+.heart {
+    fill: #FF6B08;
+    position: relative;
+    width: 14px;
+    margin: 0px 8px -2px 8px;
+}
+
+
+
+/* ================================================= MOBILE 👇 ========================================= */
+@media screen and (min-width: 320px) {
+    .container {
+        max-width: 320px;
+    }
+
+}
+
+/* ============== TABLET 👇 ======================== */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+
+    .container-footer {
+        margin: 0;
+    }
+
+    .footer-text {
+        max-width: 100%;
+    }
+
+    .page-footer {
+        height: 79px;
+    }
+
+    .footer {
+        flex-direction: row;
+        gap: 72px;
+    }
+
+}
+
+
+/* ================== DESKTOP 👇 ===================== */
+@media screen and (min-width: 1280px) {
+    .container {
+        max-width: 1280px;
+    }
+
+    .footer {
+        flex-wrap: nowrap;
+    }
+
+}
