@@ -107,3 +107,76 @@
     font-size: 20px;
   }
 }
+
+
+/* Pagination Control */
+.control-pagination {
+  display: flex;
+  justify-content: center;
+  margin: 60px, auto;
+}
+
+.control-pagination ul {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 3px;
+  width: 374px;
+  height: 40px;
+  margin: 60px, auto;
+}
+
+.control-pagination ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33333;
+  color: #000;
+  width: 40px;
+  height: 40px;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.control-pagination ul li.numb {
+  border-radius: 5px;
+
+}
+
+.control-pagination ul li.numb.first {
+  align-items: center;
+}
+
+.control-pagination ul li.numb.last {
+  align-items: center;
+}
+
+.control-pagination ul li.dots {
+  padding-bottom: 8px;
+  cursor: default;
+  width: auto;
+}
+
+.control-pagination ul li.btn {
+  border-radius: 5px;
+  background: rgba(247, 247, 247, 1);
+}
+
+.control-pagination ul li.prev {
+  transform: rotate(-180deg);
+}
+
+.control-pagination li.active,
+.control-pagination ul li.numb:hover {
+  background: rgba(255, 107, 8, 1);
+  color: #fff;
+}
+
+.control-pagination ul li.btn:hover {
+  background: rgba(247, 247, 247, 0.8);
+}
+
+ /* ------------ End Pagination Control */
