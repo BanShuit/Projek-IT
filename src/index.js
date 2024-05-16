@@ -119,7 +119,7 @@ function renderMovies(dataMovies) {
                     ${urlW185.url} 185w,
                     ${urlW342.url} 342w,
                     ${urlW500.url} 500w,
-                    ${urlW780.url} 780w
+                    ${urlW780.url} 780w,
                      ${urlOriginal.url} 2000w
                   "
                   sizes="(min-width: 1157px) 780px, (min-width: 768px) 500px, (max-width: 767px) 342px, 100vw"
@@ -337,7 +337,7 @@ function getGenres(genre_ids) {
 
 // -------------KonradKonik End
 
-// MartaMajnusz - wyszukiwarka (F10)
+// MartaMajnusz - wyszukiwarka (F10) + biblioteka
 
 const search = document.querySelector('.search-form');
 const cardsList = document.querySelector('ul#cards-list');
@@ -347,6 +347,7 @@ search.addEventListener('submit', async ev => {
   ev.preventDefault();
   cardsList.innerHTML = ` `;
   const warning = document.querySelector(`p.warning`);
+  warning.innerText = ``;
   const searchTerm = ev.currentTarget.elements.searchQuery.value;
   lastSearchTerm = searchTerm;
 
@@ -357,8 +358,7 @@ search.addEventListener('submit', async ev => {
 
     if (searchTerm === lastSearchTerm) {
       if (data.results.length === 0) {
-        console.log(`Nie znaleziono filmów`);
-        warning.innerText = `Search result not successful. Enter the correct movie name and`;
+        warning.innerText = `Search result not successful. Enter the correct movie name and try again.`;
       } else {
         createCards(dataMovies, genresList);
       }
@@ -399,10 +399,23 @@ async function searchMovies(searchTerm) {
 //tworzenie kart
 function createCards(dataMovies, genresList) {
   const gallery = document.querySelector('.cards-list');
+  gallery.innerHTML = null;
   dataMovies.forEach(element => {
+    // movie data
     const id = element.id;
+    const title = element.title;
+    // posters
     const posterPath = element.poster_path;
-
+    const urlSizePoster = getUrlSizePoster(posterPath);
+    const urlW154 = urlSizePoster.find(obj => obj.name === 'w154');
+    // console.log(posterPath);
+    // console.log(urlW154);
+    const urlW185 = urlSizePoster.find(obj => obj.name === 'w185');
+    const urlW342 = urlSizePoster.find(obj => obj.name === 'w342');
+    const urlW500 = urlSizePoster.find(obj => obj.name === 'w500');
+    const urlW780 = urlSizePoster.find(obj => obj.name === 'w780');
+    const urlOriginal = urlSizePoster.find(obj => obj.name === 'original');
+    // genres
     const genreIds = element.genre_ids;
     const genreNames = [];
     genreIds.forEach(id => {
@@ -413,20 +426,36 @@ function createCards(dataMovies, genresList) {
         genreNames.push('Unknown');
       }
     });
-
-    const title = element.title;
+    // year
     const releaseDate = element.release_date;
     const d = new Date(releaseDate);
-    let year = d.getFullYear();
+    let year;
+    if (releaseDate === NaN || releaseDate === 0 || releaseDate === ``) {
+      year = ``;
+    } else {
+      year = d.getFullYear();
+    }
 
+    // new card
     const card = document.createElement(`div`);
     card.classList.add('card');
     card.innerHTML = `
     <li>
   <div class="card" data-id="${id}">
     <div class="card-img">
-
-    <img src ="https://image.tmdb.org/t/p/original/${posterPath}"/></div>
+    <img class="card-img"
+                  alt="${title}"
+                  src="${urlW154.url}"
+                  srcset="
+                    ${urlW185.url} 185w,
+                    ${urlW342.url} 342w,
+                    ${urlW500.url} 500w,
+                    ${urlW780.url} 780w,
+                     ${urlOriginal.url} 2000w
+                  "
+                  sizes="(min-width: 1157px) 780px, (min-width: 768px) 500px, (max-width: 767px) 342px, 100vw"
+                />
+    </div>
     <div class="card-text">
       <p class="card-text-title">${title}</p>
       <p class="card-text-genre">${genreNames.join(', ')} | ${year}</p>
@@ -437,5 +466,3 @@ function createCards(dataMovies, genresList) {
     gallery.appendChild(card);
   });
 }
-
-// Marta - koniec
