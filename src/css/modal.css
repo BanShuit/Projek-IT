@@ -1,0 +1,488 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.modal {
+  /* Ukryj domyślnie modal */
+  position: fixed; /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
+  z-index: 1; /* Ustaw indeks na pierwszym planie */
+  left: 0;
+  top: 0;
+  width: 100%; /* Ustaw szerokość na 100% ekranu */
+  height: 100%; /* Ustaw wysokość na 100% ekranu */
+  overflow: auto; /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.4
+  ); /* Dodać efekt podmywania: czarny kolor z przezroczystością */
+}
+
+/* Styl dla zawartości modala */
+.modal-content {
+  background-color: #fefefe; /* Tło modala */
+  margin: 15% auto; /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
+  padding: 48px 20px 40px 20px;
+
+  display: block;
+  position: relative;
+  width: 280px; /* Ustaw szerokość na 92% */
+}
+img {
+  width: 240px; /* Ustaw szerokość obrazka */
+  height: 357px;
+  border-radius: 5px; /*kurczę coś nie działa ten obrazek, jest przesunięty na lewo :/*/
+}
+.movie-title {
+  margin: 0px;
+  font-size: 20px;
+}
+.modal-desc {
+  margin-top: 20px;
+}
+.movie-details {
+  justify-content: left;
+  padding: 0%;
+  display: flex;
+  margin-top: 20px;
+}
+.movie-details-variables {
+  list-style-type: none;
+  padding: 0;
+  margin: 0px;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+.movie-details-values {
+  list-style-type: none;
+  padding: 0;
+  margin: 0px;
+  margin-left: 80px;
+  font-size: 12px;
+}
+.movie-summary {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-top: 20px;
+}
+.movie-summary p {
+  margin: 0px;
+  font-weight: 500 bold;
+}
+.movie-summary p:first-child {
+  margin-bottom: 8px;
+  line-height: 16px;
+}
+/* Styl dla przycisku zamykania */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  margin: 0px;
+  line-height: 15px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Dodatkowy styl dla przycisków */
+button {
+  padding: 14px 9px;
+  margin-top: 20px;
+
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #000;
+  border-radius: 5px;
+  font-size: 12px;
+}
+button:first-of-type {
+  margin-right: 20px;
+}
+
+button:hover {
+  background-color: #ff6b01;
+  color: white;
+  border: 1px solid #ff6b01;
+}
+.property-list {
+  list-style: none;
+  padding: 0;
+  margin: 0px;
+}
+
+.property-list li {
+  display: flex;
+  margin-bottom: 8px; /*jak ustawić margin tylko pomiędzy elementami li?*/
+}
+.property-list li:last-child {
+  margin-bottom: 0px; /* Dodaj margines tylko dla ostatniego elementu */
+}
+
+.property {
+  font-weight: bold;
+  margin-right: 5px; /* Dodajemy odstęp między właściwością a wartością */
+  width: 152px;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+  color: #8c8c8c;
+}
+
+.value {
+  /* Ustawiamy wartości jako blok, aby były wyświetlane jeden pod drugim */
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: bold;
+  display: flex;
+}
+
+.first-value {
+  display: flex;
+  justify-content: space-around;
+  background-color: #ff6b01;
+  border-radius: 5px;
+  height: 16px;
+  width: 36px;
+  color: white;
+}
+.value-slash {
+  font-size: 12px;
+  color: #8c8c8c;
+  font-weight: normal;
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+  .modal {
+    /* Ukryj domyślnie modal */
+    position: fixed; /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
+    z-index: 1; /* Ustaw indeks na pierwszym planie */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ustaw szerokość na 100% ekranu */
+    height: 100%; /* Ustaw wysokość na 100% ekranu */
+    overflow: auto; /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
+    background-color: rgba(
+      0,
+      0,
+      0,
+      0.4
+    ); /* Dodać efekt podmywania: czarny kolor z przezroczystością */
+  }
+
+  /* Styl dla zawartości modala */
+  .modal-content {
+    background-color: #fefefe; /* Tło modala */
+    margin: 15% auto; /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
+    padding: 40px 72px 40px 36px;
+
+    display: flex;
+    position: relative;
+    width: 704px; /* Ustaw szerokość na 92% */
+  }
+  img {
+    width: 264px; /* Ustaw szerokość obrazka */
+    height: 373.55px;
+    border-radius: 5px;
+  }
+  .movie-title {
+    margin: 0px;
+    font-size: 20px;
+  }
+  .modal-desc {
+    margin-left: 68px;
+  }
+  .movie-details {
+    justify-content: left;
+    padding: 0%;
+    display: flex;
+    margin-top: 20px;
+  }
+  .movie-details-variables {
+    list-style-type: none;
+    padding: 0;
+    margin: 0px;
+    font-size: 12px;
+    color: #8c8c8c;
+  }
+  .movie-details-values {
+    list-style-type: none;
+    padding: 0;
+    margin: 0px;
+    margin-left: 80px;
+    font-size: 12px;
+  }
+  .movie-summary {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-top: 20px;
+  }
+  .movie-summary p {
+    margin: 0px;
+    font-weight: 500 bold;
+  }
+  .movie-summary p:first-child {
+    margin-bottom: 8px;
+    line-height: 16px;
+  }
+  /* Styl dla przycisku zamykania */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    margin: 0px;
+    line-height: 15px;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Dodatkowy styl dla przycisków */
+  button {
+    padding: 14px 9px;
+    margin-top: 20px;
+
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  button:first-of-type {
+    margin-right: 15px;
+  }
+
+  button:hover {
+    background-color: #ff6b01;
+    color: white;
+    border: 1px solid #ff6b01;
+  }
+  .property-list {
+    list-style: none;
+    padding: 0;
+    margin: 0px;
+  }
+
+  .property-list li {
+    display: flex;
+    margin-bottom: 8px; /*jak ustawić margin tylko pomiędzy elementami li?*/
+  }
+  .property-list li:last-child {
+    margin-bottom: 0px; /* Dodaj margines tylko dla ostatniego elementu */
+  }
+
+  .property {
+    font-weight: bold;
+    margin-right: 5px; /* Dodajemy odstęp między właściwością a wartością */
+    width: 108px;
+    font-size: 12px;
+    line-height: 16px;
+    align-items: center;
+    color: #8c8c8c;
+  }
+
+  .value {
+    /* Ustawiamy wartości jako blok, aby były wyświetlane jeden pod drugim */
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: bold;
+    display: flex;
+  }
+
+  .first-value {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ff6b01;
+    border-radius: 5px;
+    height: 16px;
+    width: 36px;
+    color: white;
+  }
+  .value-slash {
+    font-size: 12px;
+    color: #8c8c8c;
+    font-weight: normal;
+  }
+}
+@media (min-width: 901px) {
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+  .modal {
+    /* Ukryj domyślnie modal */
+    position: fixed; /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
+    z-index: 1; /* Ustaw indeks na pierwszym planie */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ustaw szerokość na 100% ekranu */
+    height: 100%; /* Ustaw wysokość na 100% ekranu */
+    overflow: auto; /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
+    background-color: rgba(
+      0,
+      0,
+      0,
+      0.4
+    ); /* Dodać efekt podmywania: czarny kolor z przezroczystością */
+  }
+
+  /* Styl dla zawartości modala */
+  .modal-content {
+    background-color: #fefefe; /* Tło modala */
+    margin: 15% auto; /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
+    padding: 40px 12px;
+    width: 806px; /* ewentualnie zmienić na procenty?? */
+    display: flex;
+    position: relative;
+  }
+  img {
+    width: 375px; /* Ustaw szerokość obrazka */
+    height: auto;
+    border-radius: 5px;
+  }
+  .movie-title {
+    margin: 0px;
+    font-size: 30px;
+  }
+  .modal-desc {
+    margin-left: 16px;
+  }
+  .movie-details {
+    justify-content: left;
+    padding: 0%;
+    display: flex;
+    margin-top: 20px;
+  }
+  .movie-details-variables {
+    list-style-type: none;
+    padding: 0;
+    margin: 0px;
+    font-size: 12px;
+    color: #8c8c8c;
+  }
+  .movie-details-values {
+    list-style-type: none;
+    padding: 0;
+    margin: 0px;
+    margin-left: 80px;
+    font-size: 12px;
+  }
+  .movie-summary {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-top: 20px;
+  }
+  .movie-summary p {
+    margin: 0px;
+    font-weight: 500 bold;
+  }
+  .movie-summary p:first-child {
+    margin-bottom: 8px;
+    line-height: 16px;
+  }
+  /* Styl dla przycisku zamykania */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Dodatkowy styl dla przycisków */
+  button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  button:first-of-type {
+    margin-left: 24px;
+  }
+
+  button:hover {
+    background-color: #ff6b01;
+    color: white;
+    border: 1px solid #ff6b01;
+  }
+  .property-list {
+    list-style: none;
+    padding: 0;
+    margin: 0px;
+  }
+
+  .property-list li {
+    display: flex;
+    margin-bottom: 8px; /*jak ustawić margin tylko pomiędzy elementami li?*/
+  }
+  .property-list li:last-child {
+    margin-bottom: 0px; /* Dodaj margines tylko dla ostatniego elementu */
+  }
+
+  .property {
+    font-weight: bold;
+    margin-right: 5px; /* Dodajemy odstęp między właściwością a wartością */
+    width: 152px;
+    font-size: 12px;
+    line-height: 16px;
+    align-items: center;
+    color: #8c8c8c;
+  }
+
+  .value {
+    /* Ustawiamy wartości jako blok, aby były wyświetlane jeden pod drugim */
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: bold;
+    display: flex;
+  }
+
+  .first-value {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ff6b01;
+    border-radius: 5px;
+    height: 16px;
+    width: 36px;
+    color: white;
+  }
+  .value-slash {
+    font-size: 12px;
+    color: #8c8c8c;
+    font-weight: normal;
+  }
+}
