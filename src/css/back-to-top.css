@@ -1,0 +1,19 @@
+.back-to-top {
+  display: none;
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  z-index: 9;
+  border: none;
+  outline: none;
+  background-color: rgba(188, 12, 12, 0.55);
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.back-to-top:hover {
+  background-color: rgba(188, 12, 12, 0.88);
+}
