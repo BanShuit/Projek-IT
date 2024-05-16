@@ -13,6 +13,19 @@ const AXIOS_AUTHORIZATION =
   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YmI4OTQ0OTRjMWE3MDc2MTg2NDhiOTE2NGYzOTNjMiIsInN1YiI6IjVlZDdiZmY3ZTRiNTc2MDAyMDM3NjYzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kRGs0WRoomKwYXT7Mt8PNU2Zk6kAVasud5CyVVdf2mA';
 //Axios header - api key
 axios.defaults.headers.common['Authorization'] = AXIOS_AUTHORIZATION;
+// Loader - klaudia
+
+const loader = document.querySelector('.loader');
+
+function showLoader() {
+  loader.style.display = 'block';
+}
+
+function hideLoader() {
+  loader.style.display = 'none';
+}
+
+hideLoader(); // Ukrycie loadera na początku
 
 //DOM
 const homeButton = document.querySelector('span#logo');
@@ -325,7 +338,6 @@ function getGenres(genre_ids) {
 // -------------KonradKonik End
 
 // MartaMajnusz - wyszukiwarka (F10)
-import { searchMovies, fetchGenresList, createCards } from './scripts/search.js';
 
 const search = document.querySelector('.search-form');
 const cardsList = document.querySelector('ul#cards-list');
@@ -355,5 +367,75 @@ search.addEventListener('submit', async ev => {
     console.error('Wystąpił błąd:', error);
   }
 });
+async function fetchGenresList() {
+  const url = `https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=6bb894494c1a707618648b9164f393c2`;
+  try {
+    const response = await axios.get(url);
+    return response.data.genres;
+  } catch (error) {
+    console.error('Wystąpił błąd podczas pobierania listy gatunków:', error);
+    throw error;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// wyszukiwarka
+async function searchMovies(searchTerm) {
+  try {
+    showLoader(); // Wyświetlenie loadera przed wyszukaniem filmów
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+    const url = `https://api.themoviedb.org/3/search/movie?query=${encodedSearchTerm}&api_key=d45c591dd3ef2fb9c22b9964b5ee2547`;
+    const response = await axios.get(url);
+    hideLoader(); // Ukrycie loadera po otrzymaniu odpowiedzi
+    return response.data;
+  } catch (error) {
+    hideLoader(); // Ukrycie loadera w przypadku błędu
+    console.error('Wystąpił błąd podczas wyszukiwania:', error);
+    throw error;
+  }
+}
+
+// ----------------------------------------------------------------------------
+//tworzenie kart
+function createCards(dataMovies, genresList) {
+  const gallery = document.querySelector('.cards-list');
+  dataMovies.forEach(element => {
+    const id = element.id;
+    const posterPath = element.poster_path;
+
+    const genreIds = element.genre_ids;
+    const genreNames = [];
+    genreIds.forEach(id => {
+      const genre = genresList.find(genre => genre.id === id);
+      if (genre) {
+        genreNames.push(genre.name);
+      } else {
+        genreNames.push('Unknown');
+      }
+    });
+
+    const title = element.title;
+    const releaseDate = element.release_date;
+    const d = new Date(releaseDate);
+    let year = d.getFullYear();
+
+    const card = document.createElement(`div`);
+    card.classList.add('card');
+    card.innerHTML = `
+    <li>
+  <div class="card" data-id="${id}">
+    <div class="card-img">
+
+    <img src ="https://image.tmdb.org/t/p/original/${posterPath}"/></div>
+    <div class="card-text">
+      <p class="card-text-title">${title}</p>
+      <p class="card-text-genre">${genreNames.join(', ')} | ${year}</p>
+    </div>
+  </div>
+</li>
+    `;
+    gallery.appendChild(card);
+  });
+}
 
 // Marta - koniec
