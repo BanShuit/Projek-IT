@@ -17,12 +17,17 @@
     transform: rotate(360deg);
   }
 }
+
+.card-element {
+  list-style: none;
+}
 .cards-list {
   display: flex;
   flex-wrap: wrap;
   gap: 32px 32px;
   margin: 20px 20px 40px;
 }
+
 .card-img img {
   border-radius: 5px;
   width: 280px;
@@ -37,12 +42,10 @@
 
 .card-text-title {
   font-family: 'Roboto', sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 12px;
   text-transform: uppercase;
   color: #000;
-  margin-bottom: 5px;
-  font-weight: bold;
   line-height: 133%;
 }
 
@@ -51,7 +54,6 @@
   font-family: 'Roboto', sans-serif;
   margin-top: 0;
   font-size: 12px;
-  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1157px) {
@@ -69,15 +71,6 @@
   .card {
     width: 336px;
     height: 494px;
-  }
-
-  .card-text-title {
-    font-weight: 600;
-    font-size: 12px;
-  }
-
-  .card-text-genre {
-    font-size: 12px;
   }
 }
 
@@ -108,7 +101,6 @@
   }
 }
 
-
 /* Pagination Control */
 .control-pagination {
   display: flex;
@@ -129,7 +121,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33333;
@@ -143,7 +135,6 @@
 
 .control-pagination ul li.numb {
   border-radius: 5px;
-
 }
 
 .control-pagination ul li.numb.first {
@@ -179,4 +170,4 @@
   background: rgba(247, 247, 247, 0.8);
 }
 
- /* ------------ End Pagination Control */
+/* ------------ End Pagination Control */
