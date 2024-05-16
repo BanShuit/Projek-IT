@@ -215,6 +215,7 @@ search.addEventListener('submit', async ev => {
   ev.preventDefault();
   cardsList.innerHTML = ` `;
   const warning = document.querySelector(`p.warning`);
+  warning.innerText = '';
   const searchTerm = ev.currentTarget.elements.searchQuery.value;
   lastSearchTerm = searchTerm;
 
@@ -226,7 +227,7 @@ search.addEventListener('submit', async ev => {
     if (searchTerm === lastSearchTerm) {
       if (data.results.length === 0) {
         console.log(`Nie znaleziono filmów`);
-        warning.innerText = `Search result not successful. Enter the correct movie name and`;
+        warning.innerText = `Search result not successful. Enter the correct movie name and try again`;
       } else {
         createCards(dataMovies, genresList);
       }
@@ -252,7 +253,7 @@ async function searchMovies(searchTerm) {
   try {
     showLoader(); // Wyświetlenie loadera przed wyszukaniem filmów
     const encodedSearchTerm = encodeURIComponent(searchTerm);
-    const url = `https://api.themoviedb.org/3/search/movie?query=${encodedSearchTerm}&api_key=d45c591dd3ef2fb9c22b9964b5ee2547`;
+    const url = `https://api.themoviedb.org/3/search/movie?query=${encodedSearchTerm}&api_key=6bb894494c1a707618648b9164f393c2`;
     const response = await axios.get(url);
     hideLoader(); // Ukrycie loadera po otrzymaniu odpowiedzi
     return response.data;
