@@ -1,26 +1,173 @@
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-bottom-color: #ff3d00;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin: 2rem auto;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.card-element {
+  list-style: none;
+}
+.cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 32px;
+  margin: 20px 20px 40px;
+}
+
+.card-img img {
+  border-radius: 5px;
+  width: 280px;
+  height: 402px;
+}
+
+.card {
+  width: 280px;
+  height: 443px;
+  margin-bottom: 20px;
+}
+
+.card-text-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #000;
+  line-height: 133%;
+}
+
+.card-text-genre {
+  color: #ff6b08;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 0;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1157px) {
+  .cards-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px 32px;
+    margin: 60px 32px;
+  }
+  .card-img img {
+    width: 336px;
+    height: 455px;
+  }
+
+  .card {
+    width: 336px;
+    height: 494px;
+  }
+}
+
 @media screen and (min-width: 1157px) {
-    .cards-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 32px 16px;
-        margin: 60px 30px;
-    }
+  .cards-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px 16px;
+    margin: 60px 30px;
+  }
+  .card-img img {
+    width: 394px;
+    height: 574px;
+  }
+
+  .card {
+    width: 394px;
+    height: 634px;
+  }
+
+  .card-text-title {
+    font-size: 20px;
+    line-height: 120%;
+  }
+
+  .card-text-genre {
+    font-size: 20px;
+  }
 }
 
-@media screen and (min-width: 768px)and (max-width: 1157px) {
-    .cards-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 32px 32px;
-        margin: 60px 32px;
-    }
+/* Pagination Control */
+.control-pagination {
+  display: flex;
+  justify-content: center;
+  margin: 60px, auto;
 }
 
-@media screen and (max-width: 767px) {
-    .cards-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 32px 32px;
-        margin: 20px 20px 40px;
-    }
+.control-pagination ul {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 3px;
+  width: 374px;
+  height: 40px;
+  margin: 60px, auto;
 }
+
+.control-pagination ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33333;
+  color: #000;
+  width: 40px;
+  height: 40px;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.control-pagination ul li.numb {
+  border-radius: 5px;
+}
+
+.control-pagination ul li.numb.first {
+  align-items: center;
+}
+
+.control-pagination ul li.numb.last {
+  align-items: center;
+}
+
+.control-pagination ul li.dots {
+  padding-bottom: 8px;
+  cursor: default;
+  width: auto;
+}
+
+.control-pagination ul li.btn {
+  border-radius: 5px;
+  background: rgba(247, 247, 247, 1);
+}
+
+.control-pagination ul li.prev {
+  transform: rotate(-180deg);
+}
+
+.control-pagination li.active,
+.control-pagination ul li.numb:hover {
+  background: rgba(255, 107, 8, 1);
+  color: #fff;
+}
+
+.control-pagination ul li.btn:hover {
+  background: rgba(247, 247, 247, 0.8);
+}
+
+/* ------------ End Pagination Control */
