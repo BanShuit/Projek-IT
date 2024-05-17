@@ -109,7 +109,7 @@ function renderMovies(dataMovies) {
       const genres = getGenres(genre_ids);
       const year = release_date.split('-')[0];
 
-      return `<li>
+      return `<li class="card-element">
             <div class="card" data-id="${id}">
               <div >
                 <img class="card-img"
@@ -440,7 +440,7 @@ function createCards(dataMovies, genresList) {
     const card = document.createElement(`div`);
     card.classList.add('card');
     card.innerHTML = `
-    <li>
+    <li class="card-element">
   <div class="card" data-id="${id}">
     <div class="card-img">
     <img class="card-img"
