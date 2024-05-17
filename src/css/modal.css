@@ -203,6 +203,7 @@ button:hover {
   }
   .modal-desc {
     margin-left: 68px;
+    margin-top: 0px;
   }
   .movie-details {
     justify-content: left;
@@ -366,6 +367,7 @@ button:hover {
   }
   .modal-desc {
     margin-left: 16px;
+    margin-top: 0px;
   }
   .movie-details {
     justify-content: left;
