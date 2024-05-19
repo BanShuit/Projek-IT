@@ -442,7 +442,7 @@ function createCards(dataMovies, genresList) {
     card.innerHTML = `
     <li class="card-element">
   <div class="card" data-id="${id}">
-    <div class="card-img">
+    <div class="card-img-div">
     <img class="card-img"
                   alt="${title}"
                   src="${urlW154.url}"

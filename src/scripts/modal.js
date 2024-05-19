@@ -1,4 +1,4 @@
-const selectedMovie = {};
+let selectedMovie = {};
 
 const modal = document.getElementById('movieModal');
 const closeBtn = document.getElementById('closeBtn');
@@ -41,6 +41,7 @@ function addToWatched(movie) {
 watchedBtn.onclick = function () {
   addToWatched(selectedMovie);
   console.log('Film dodany do obejrzanych:', selectedMovie);
+  displayLocalStorageContent();
 };
 
 queueBtn.onclick = function () {
@@ -67,7 +68,49 @@ document.onkeydown = function (event) {
   }
 };
 
-// Otwarcie modala (dla przykładu, otwiera się automatycznie)
-window.onload = function () {
-  modal.style.display = 'block';
-};
+document.body.addEventListener('click', function (event) {
+  if (event.target.classList.contains('card-img')) {
+    modal.style.display = 'block';
+    // Pobierz wartość atrybutu src klikniętego obrazka
+    const imgSrc = event.target.getAttribute('src');
+
+    //ustawienie plakatu
+    const moviePoster = document.getElementById('moviePoster');
+    moviePoster.src = imgSrc;
+
+    //ustawienie tytułu
+    const cardTextTitle = event.target.closest('.card').querySelector('.card-text-title');
+
+    // Wyświetl zawartość 'card-text-title' w konsoli
+
+    const movieTitle = document.querySelector('.movie-title');
+
+    // Przypisz zawartość 'card-text-title' do 'movie-title'
+    movieTitle.textContent = cardTextTitle.textContent;
+
+    //ustawienie gatunku
+    const cardGenre = event.target.closest('.card').querySelector('.card-text-genre');
+
+    // Wyświetl zawartość 'card-text-title' w konsoli
+
+    const movieGenre = document.querySelector('.value');
+
+    // Przypisz zawartość 'card-text-title' do 'movie-title'
+    movieGenre.textContent = cardGenre.textContent;
+
+    selectedMovie = {
+      imgSrc: imgSrc,
+      MovieTitle: cardTextTitle.textContent,
+      MovieGenre: cardGenre.textContent,
+    };
+  }
+});
+function displayLocalStorageContent() {
+  setTimeout(() => {
+    const movieQueueJSON = localStorage.getItem('movieQueue');
+    const watchedMoviesJSON = localStorage.getItem('watchedMovies');
+
+    console.log('Movie Queue:', JSON.parse(movieQueueJSON));
+    console.log('Watched Movies:', JSON.parse(watchedMoviesJSON));
+  }, 1000); // Opóźnienie wynosi 1 sekundę (1000 milisekund)
+}
