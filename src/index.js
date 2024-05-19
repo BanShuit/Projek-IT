@@ -168,10 +168,12 @@ function createPaginationNew(totalPages, page, callback) {
     } else {
       paginationButtonLeft.disabled = false;
     }
-    if (page > 3) {
-      liTag += `<li class="pagination-new-numb" data-page="1"><span>1</span></li>`;
-      if (page > 4) {
-        liTag += `<li class="pagination-new-dots">...</li>`;
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      if (page > 3) {
+        liTag += `<li class="pagination-new-numb" data-page="1"><span>1</span></li>`;
+        if (page > 4) {
+          liTag += `<li class="pagination-new-dots">...</li>`;
+        }
       }
     }
 
@@ -203,13 +205,14 @@ function createPaginationNew(totalPages, page, callback) {
       liTag += `<li class="pagination-new-numb ${active}" ${currentPage} data-page="${plength}"><span>${plength}</span></li>`;
     }
 
-    if (page < totalPages - 2) {
-      if (page < totalPages - 3) {
-        liTag += `<li class="pagination-new-dots">...</li>`;
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      if (page < totalPages - 2) {
+        if (page < totalPages - 3) {
+          liTag += `<li class="pagination-new-dots">...</li>`;
+        }
+        liTag += `<li class="pagination-new-last pagination-new-numb" data-page="${totalPages}"><span>${totalPages}</span></li>`;
       }
-      liTag += `<li class="pagination-new-last pagination-new-numb" data-page="${totalPages}"><span>${totalPages}</span></li>`;
     }
-
     if (page < totalPages) {
       paginationButtonRight.dataset.page = `${page + 1}`;
       paginationButtonRight.disabled = false;
@@ -243,6 +246,10 @@ function createPaginationNew(totalPages, page, callback) {
       });
       noEventListener = false;
     }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
     return liTag;
   }
 }

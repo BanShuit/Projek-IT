@@ -110,7 +110,7 @@
   gap: 3px;
   align-items: center;
   justify-content: center;
-  margin: 60px auto;
+  margin: 40px auto;
 }
 
 .pagination-new-list {
@@ -173,10 +173,7 @@
 }
 
 .pagination-new-dots {
-  padding-bottom: 8px;
-  cursor: default;
-  user-select: none;
-  width: auto;
+  display: none;
 }
 
 .pagination-new li.active,
@@ -184,4 +181,19 @@
   background-color: rgba(255, 107, 8, 0.5);
   color: #fff;
 }
+
+@media screen and (min-width: 768px) {
+  .pagination-new {
+    margin: 60px auto;
+  }
+
+  .pagination-new-dots {
+    display: block;
+    padding-bottom: 8px;
+    cursor: default;
+    user-select: none;
+    width: auto;
+  }
+}
+
 /* ------------ End Pagination Control */
