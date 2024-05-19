@@ -13,19 +13,16 @@ const AXIOS_AUTHORIZATION =
   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YmI4OTQ0OTRjMWE3MDc2MTg2NDhiOTE2NGYzOTNjMiIsInN1YiI6IjVlZDdiZmY3ZTRiNTc2MDAyMDM3NjYzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kRGs0WRoomKwYXT7Mt8PNU2Zk6kAVasud5CyVVdf2mA';
 //Axios header - api key
 axios.defaults.headers.common['Authorization'] = AXIOS_AUTHORIZATION;
+
 // Loader - klaudia
-
 const loader = document.querySelector('.loader');
-
-function showLoader() {
+export function showLoader() {
   loader.style.display = 'block';
 }
-
-function hideLoader() {
+export function hideLoader() {
   loader.style.display = 'none';
 }
-
-hideLoader(); // Ukrycie loadera na początku
+// hideLoader(); // Ukrycie loadera na początku
 
 //DOM
 const homeButton = document.querySelector('span#logo');
@@ -230,7 +227,7 @@ export function createPagination(totalPages, page, callback) {
  * @param {string} posterPath Endpoint ścieżki do pliku obrazka
  * @returns {Object[]} Tablica obiektów zawierających nazwę i URL różnych rozmiarów obrazka.
  */
-function getUrlSizePoster(posterPath) {
+export function getUrlSizePoster(posterPath) {
   const url = 'https://image.tmdb.org/t/p/';
   const poster_sizes = ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original'];
   const postersUrlsObject = poster_sizes.map(size => {
@@ -337,7 +334,9 @@ function getGenres(genre_ids) {
 
 // -------------KonradKonik End
 
-// MartaMajnusz - wyszukiwarka (F10) + biblioteka
+// MartaMajnusz - wyszukiwarka (F10)
+
+import { fetchGenresList, createCards, searchMovies } from './scripts/search.js';
 
 const search = document.querySelector('.search-form');
 const cardsList = document.querySelector('ul#cards-list');
@@ -345,6 +344,8 @@ let lastSearchTerm;
 
 search.addEventListener('submit', async ev => {
   ev.preventDefault();
+  const controlPagination = document.querySelector('ul#control-pagination-list');
+  controlPagination.innerHTML = ``;
   cardsList.innerHTML = ` `;
   const warning = document.querySelector(`p.warning`);
   warning.innerText = ``;
@@ -367,102 +368,5 @@ search.addEventListener('submit', async ev => {
     console.error('Wystąpił błąd:', error);
   }
 });
-async function fetchGenresList() {
-  const url = `https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=6bb894494c1a707618648b9164f393c2`;
-  try {
-    const response = await axios.get(url);
-    return response.data.genres;
-  } catch (error) {
-    console.error('Wystąpił błąd podczas pobierania listy gatunków:', error);
-    throw error;
-  }
-}
 
-// ----------------------------------------------------------------------------
-// wyszukiwarka
-async function searchMovies(searchTerm) {
-  try {
-    showLoader(); // Wyświetlenie loadera przed wyszukaniem filmów
-    const encodedSearchTerm = encodeURIComponent(searchTerm);
-    const url = `https://api.themoviedb.org/3/search/movie?query=${encodedSearchTerm}&api_key=d45c591dd3ef2fb9c22b9964b5ee2547`;
-    const response = await axios.get(url);
-    hideLoader(); // Ukrycie loadera po otrzymaniu odpowiedzi
-    return response.data;
-  } catch (error) {
-    hideLoader(); // Ukrycie loadera w przypadku błędu
-    console.error('Wystąpił błąd podczas wyszukiwania:', error);
-    throw error;
-  }
-}
-
-// ----------------------------------------------------------------------------
-//tworzenie kart
-function createCards(dataMovies, genresList) {
-  const gallery = document.querySelector('.cards-list');
-  gallery.innerHTML = null;
-  dataMovies.forEach(element => {
-    // movie data
-    const id = element.id;
-    const title = element.title;
-    // posters
-    const posterPath = element.poster_path;
-    const urlSizePoster = getUrlSizePoster(posterPath);
-    const urlW154 = urlSizePoster.find(obj => obj.name === 'w154');
-    // console.log(posterPath);
-    // console.log(urlW154);
-    const urlW185 = urlSizePoster.find(obj => obj.name === 'w185');
-    const urlW342 = urlSizePoster.find(obj => obj.name === 'w342');
-    const urlW500 = urlSizePoster.find(obj => obj.name === 'w500');
-    const urlW780 = urlSizePoster.find(obj => obj.name === 'w780');
-    const urlOriginal = urlSizePoster.find(obj => obj.name === 'original');
-    // genres
-    const genreIds = element.genre_ids;
-    const genreNames = [];
-    genreIds.forEach(id => {
-      const genre = genresList.find(genre => genre.id === id);
-      if (genre) {
-        genreNames.push(genre.name);
-      } else {
-        genreNames.push('Unknown');
-      }
-    });
-    // year
-    const releaseDate = element.release_date;
-    const d = new Date(releaseDate);
-    let year;
-    if (releaseDate === NaN || releaseDate === 0 || releaseDate === ``) {
-      year = ``;
-    } else {
-      year = d.getFullYear();
-    }
-
-    // new card
-    const card = document.createElement(`div`);
-    card.classList.add('card');
-    card.innerHTML = `
-    <li class="card-element">
-  <div class="card" data-id="${id}">
-    <div class="card-img">
-    <img class="card-img"
-                  alt="${title}"
-                  src="${urlW154.url}"
-                  srcset="
-                    ${urlW185.url} 185w,
-                    ${urlW342.url} 342w,
-                    ${urlW500.url} 500w,
-                    ${urlW780.url} 780w,
-                     ${urlOriginal.url} 2000w
-                  "
-                  sizes="(min-width: 1157px) 780px, (min-width: 768px) 500px, (max-width: 767px) 342px, 100vw"
-                />
-    </div>
-    <div class="card-text">
-      <p class="card-text-title">${title}</p>
-      <p class="card-text-genre">${genreNames.join(', ')} | ${year}</p>
-    </div>
-  </div>
-</li>
-    `;
-    gallery.appendChild(card);
-  });
-}
+// library
