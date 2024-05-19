@@ -8,7 +8,7 @@ body {
   left: 0;
   top: 0;
   display: none;
-  width: 100%; /* Ustaw szerokość na 100% ekranu */
+  width: 100%; /* Ustaw szerokość na 100% ekranu. */
   height: 100%; /* Ustaw wysokość na 100% ekranu */
   overflow: auto; /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
   background-color: rgba(
