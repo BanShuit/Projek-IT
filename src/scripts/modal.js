@@ -42,6 +42,7 @@ watchedBtn.onclick = function () {
   addToWatched(selectedMovie);
   console.log('Film dodany do obejrzanych:', selectedMovie);
   // displayLocalStorageContent();
+  displayLocalStorageContent();
 };
 
 queueBtn.onclick = function () {
@@ -110,3 +111,12 @@ document.body.addEventListener('click', function (event) {
     };
   }
 });
+function displayLocalStorageContent() {
+  setTimeout(() => {
+    const movieQueueJSON = localStorage.getItem('movieQueue');
+    const watchedMoviesJSON = localStorage.getItem('watchedMovies');
+
+    console.log('Movie Queue:', JSON.parse(movieQueueJSON));
+    console.log('Watched Movies:', JSON.parse(watchedMoviesJSON));
+  }, 1000); // Opóźnienie wynosi 1 sekundę (1000 milisekund)
+}

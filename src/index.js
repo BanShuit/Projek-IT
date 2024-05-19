@@ -4,9 +4,6 @@ import './sass/main.scss';
 //Import
 import axios from 'axios';
 // -------------KonradKonik
-//CreatePagination import niezbędny dla <script type="module">
-import { createPagination } from './index.js';
-window.createPagination = createPagination;
 //ApiKey
 const apiKey = '6bb894494c1a707618648b9164f393c2';
 const AXIOS_AUTHORIZATION =
@@ -27,7 +24,10 @@ export function hideLoader() {
 //DOM
 const homeButton = document.querySelector('span#logo');
 const gallery = document.querySelector('ul#cards-list');
-const controlPagination = document.querySelector('ul#control-pagination-list');
+const paginationButtons = document.querySelector('div#pagination-new');
+const pagination = document.querySelector('ul#pagination-new-list');
+const paginationButtonLeft = paginationButtons.querySelector('button#pagination-btn-left');
+const paginationButtonRight = paginationButtons.querySelector('button#pagination-btn-right');
 
 //Listeners
 homeButton.addEventListener('click', ev => {
@@ -35,6 +35,11 @@ homeButton.addEventListener('click', ev => {
   const pageNumber = 1;
   getMostPopularMovies(pageNumber);
 });
+//Global variables
+let noEventListener = true; //zmienna do funkcji paginacji
+
+//Start strony
+getMostPopularMovies(1);
 
 //Functions
 /**
@@ -132,13 +137,13 @@ function renderMovies(dataMovies) {
     .join('');
 
   gallery.insertAdjacentHTML('beforeend', filmsList);
-  if (controlPagination) {
-    createPagination(totalPages, currentPage, getMostPopularMovies);
+  if (createPaginationNew) {
+    createPaginationNew(totalPages, currentPage, getMostPopularMovies);
   }
 }
 
 /**
- *createPagination
+ *createPaginationNew
  ** Tworzy elementy paginacji i dodaje nasłuchiwacze zdarzeń dla kliknięć na te elementy.
  *
  * @param {number} totalPages - Całkowita liczba stron.
@@ -146,79 +151,104 @@ function renderMovies(dataMovies) {
  * @param {function(number): void} callback - Funkcja wywoływana po kliknięciu elementu paginacji, przyjmująca numer nowej strony.
  * @returns {string} HTML string z wygenerowanymi elementami paginacji.
  */
-export function createPagination(totalPages, page, callback) {
+function createPaginationNew(totalPages, page, callback) {
   let liTag = '';
   let currentPage;
   let active;
   let beforePage = page - 2;
   let afterPage = page + 2;
 
-  if (page > 1) {
-    liTag += `<li class="btn prev" data-page="${page - 1}"><svg width="16" height="16">
-                  <use href="../images/icons.svg#icon-arrow-right"></use>
-                </svg></li>`;
-  }
-
-  if (page > 3) {
-    liTag += `<li class="first numb" data-page="1"><span>1</span></li>`;
-    if (page > 4) {
-      liTag += `<li class="dots"><span>...</span></li>`;
-    }
-  }
-
-  if (page == totalPages) {
-    beforePage = beforePage - 1;
-  } else if (page == totalPages - 1) {
-    beforePage = beforePage;
-  }
-  if (page == 1) {
-    afterPage = afterPage + 1;
-  } else if (page == 2) {
-    afterPage = afterPage;
-  }
-
-  for (var plength = beforePage; plength <= afterPage; plength++) {
-    if (plength > totalPages) {
-      continue;
-    }
-    if (plength <= 0) {
-      continue;
-    }
-    if (page == plength) {
-      active = 'active';
-      currentPage = "id = 'pagination-current-page'";
+  if (page >= 1) {
+    paginationButtonLeft.dataset.page = `${page - 1}`;
+    if (page === 1) {
+      paginationButtonLeft.disabled = true;
     } else {
-      active = '';
-      currentPage = '';
+      paginationButtonLeft.disabled = false;
     }
-    liTag += `<li class="numb ${active}" ${currentPage} data-page="${plength}"><span>${plength}</span></li>`;
-  }
-
-  if (page < totalPages - 2) {
-    if (page < totalPages - 3) {
-      liTag += `<li class="dots"><span>...</span></li>`;
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      if (page > 3) {
+        liTag += `<li class="pagination-new-numb" data-page="1"><span>1</span></li>`;
+        if (page > 4) {
+          liTag += `<li class="pagination-new-dots">...</li>`;
+        }
+      }
     }
-    liTag += `<li class="last numb" data-page="${totalPages}"><span>${totalPages}</span></li>`;
-  }
 
-  if (page < totalPages) {
-    liTag += `<li class="btn next" data-page="${page + 1}"><svg width="16" height="16">
-          <use href="./images/icons.svg#icon-arrow-right"></use>
-        </svg></li>`;
-  }
+    if (page == totalPages) {
+      beforePage = beforePage - 1;
+    } else if (page == totalPages - 1) {
+      beforePage = beforePage;
+    }
+    if (page == 1) {
+      afterPage = afterPage + 1;
+    } else if (page == 2) {
+      afterPage = afterPage;
+    }
 
-  controlPagination.innerHTML = liTag;
+    for (var plength = beforePage; plength <= afterPage; plength++) {
+      if (plength > totalPages) {
+        continue;
+      }
+      if (plength <= 0) {
+        continue;
+      }
+      if (page == plength) {
+        active = 'active';
+        currentPage = "id = 'pagination-current-page'";
+      } else {
+        active = '';
+        currentPage = '';
+      }
+      liTag += `<li class="pagination-new-numb ${active}" ${currentPage} data-page="${plength}"><span>${plength}</span></li>`;
+    }
 
-  // Add event listeners
-  const paginationItems = controlPagination.querySelectorAll('li[data-page]');
-  paginationItems.forEach(item => {
-    item.addEventListener('click', event => {
-      const newPage = Number(event.currentTarget.getAttribute('data-page'));
-      callback(newPage);
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      if (page < totalPages - 2) {
+        if (page < totalPages - 3) {
+          liTag += `<li class="pagination-new-dots">...</li>`;
+        }
+        liTag += `<li class="pagination-new-last pagination-new-numb" data-page="${totalPages}"><span>${totalPages}</span></li>`;
+      }
+    }
+    if (page < totalPages) {
+      paginationButtonRight.dataset.page = `${page + 1}`;
+      paginationButtonRight.disabled = false;
+    } else if (page === totalPages) {
+      paginationButtonRight.disabled = true;
+    }
+    pagination.innerHTML = liTag;
+
+    // Add event listeners
+    const paginationItems = pagination.querySelectorAll('li[data-page]');
+    paginationItems.forEach(item => {
+      item.addEventListener('click', event => {
+        const newPage = Number(event.currentTarget.getAttribute('data-page'));
+        callback(newPage);
+      });
     });
-  });
 
-  return liTag;
+    if (noEventListener) {
+      paginationButtonLeft.addEventListener('click', event => {
+        const newPage = Number(event.currentTarget.getAttribute('data-page'));
+        if (newPage >= 1) {
+          callback(newPage);
+        }
+      });
+
+      paginationButtonRight.addEventListener('click', event => {
+        const newPage = Number(event.currentTarget.getAttribute('data-page'));
+        if (newPage <= totalPages) {
+          callback(newPage);
+        }
+      });
+      noEventListener = false;
+    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    return liTag;
+  }
 }
 
 /**
@@ -370,3 +400,91 @@ search.addEventListener('submit', async ev => {
 });
 
 // library
+// ----------------------------------------------------------------------------
+// wyszukiwarka
+async function searchMovies(searchTerm) {
+  try {
+    showLoader(); // Wyświetlenie loadera przed wyszukaniem filmów
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+    const url = `https://api.themoviedb.org/3/search/movie?query=${encodedSearchTerm}&api_key=d45c591dd3ef2fb9c22b9964b5ee2547`;
+    const response = await axios.get(url);
+    hideLoader(); // Ukrycie loadera po otrzymaniu odpowiedzi
+    return response.data;
+  } catch (error) {
+    hideLoader(); // Ukrycie loadera w przypadku błędu
+    console.error('Wystąpił błąd podczas wyszukiwania:', error);
+    throw error;
+  }
+}
+
+// ----------------------------------------------------------------------------
+//tworzenie kart
+function createCards(dataMovies, genresList) {
+  const gallery = document.querySelector('.cards-list');
+  gallery.innerHTML = null;
+  dataMovies.forEach(element => {
+    // movie data
+    const id = element.id;
+    const title = element.title;
+    // posters
+    const posterPath = element.poster_path;
+    const urlSizePoster = getUrlSizePoster(posterPath);
+    const urlW154 = urlSizePoster.find(obj => obj.name === 'w154');
+    // console.log(posterPath);
+    // console.log(urlW154);
+    const urlW185 = urlSizePoster.find(obj => obj.name === 'w185');
+    const urlW342 = urlSizePoster.find(obj => obj.name === 'w342');
+    const urlW500 = urlSizePoster.find(obj => obj.name === 'w500');
+    const urlW780 = urlSizePoster.find(obj => obj.name === 'w780');
+    const urlOriginal = urlSizePoster.find(obj => obj.name === 'original');
+    // genres
+    const genreIds = element.genre_ids;
+    const genreNames = [];
+    genreIds.forEach(id => {
+      const genre = genresList.find(genre => genre.id === id);
+      if (genre) {
+        genreNames.push(genre.name);
+      } else {
+        genreNames.push('Unknown');
+      }
+    });
+    // year
+    const releaseDate = element.release_date;
+    const d = new Date(releaseDate);
+    let year;
+    if (releaseDate === NaN || releaseDate === 0 || releaseDate === ``) {
+      year = ``;
+    } else {
+      year = d.getFullYear();
+    }
+
+    // new card
+    const card = document.createElement(`div`);
+    card.classList.add('card');
+    card.innerHTML = `
+    <li class="card-element">
+  <div class="card" data-id="${id}">
+    <div class="card-img-div">
+    <img class="card-img"
+                  alt="${title}"
+                  src="${urlW154.url}"
+                  srcset="
+                    ${urlW185.url} 185w,
+                    ${urlW342.url} 342w,
+                    ${urlW500.url} 500w,
+                    ${urlW780.url} 780w,
+                     ${urlOriginal.url} 2000w
+                  "
+                  sizes="(min-width: 1157px) 780px, (min-width: 768px) 500px, (max-width: 767px) 342px, 100vw"
+                />
+    </div>
+    <div class="card-text">
+      <p class="card-text-title">${title}</p>
+      <p class="card-text-genre">${genreNames.join(', ')} | ${year}</p>
+    </div>
+  </div>
+</li>
+    `;
+    gallery.appendChild(card);
+  });
+}
