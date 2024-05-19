@@ -41,6 +41,7 @@ function addToWatched(movie) {
 watchedBtn.onclick = function () {
   addToWatched(selectedMovie);
   console.log('Film dodany do obejrzanych:', selectedMovie);
+  // displayLocalStorageContent();
   displayLocalStorageContent();
 };
 
@@ -67,6 +68,11 @@ document.onkeydown = function (event) {
     closeModal();
   }
 };
+
+// // Otwarcie modala (dla przykładu, otwiera się automatycznie)
+// window.onload = function () {
+//   modal.style.display = 'block';
+// };
 
 document.body.addEventListener('click', function (event) {
   if (event.target.classList.contains('card-img')) {

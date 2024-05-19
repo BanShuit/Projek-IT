@@ -10,19 +10,16 @@ const AXIOS_AUTHORIZATION =
   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YmI4OTQ0OTRjMWE3MDc2MTg2NDhiOTE2NGYzOTNjMiIsInN1YiI6IjVlZDdiZmY3ZTRiNTc2MDAyMDM3NjYzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kRGs0WRoomKwYXT7Mt8PNU2Zk6kAVasud5CyVVdf2mA';
 //Axios header - api key
 axios.defaults.headers.common['Authorization'] = AXIOS_AUTHORIZATION;
+
 // Loader - klaudia
-
 const loader = document.querySelector('.loader');
-
-function showLoader() {
+export function showLoader() {
   loader.style.display = 'block';
 }
-
-function hideLoader() {
+export function hideLoader() {
   loader.style.display = 'none';
 }
-
-hideLoader(); // Ukrycie loadera na początku
+// hideLoader(); // Ukrycie loadera na początku
 
 //DOM
 const homeButton = document.querySelector('span#logo');
@@ -260,7 +257,7 @@ function createPaginationNew(totalPages, page, callback) {
  * @param {string} posterPath Endpoint ścieżki do pliku obrazka
  * @returns {Object[]} Tablica obiektów zawierających nazwę i URL różnych rozmiarów obrazka.
  */
-function getUrlSizePoster(posterPath) {
+export function getUrlSizePoster(posterPath) {
   const url = 'https://image.tmdb.org/t/p/';
   const poster_sizes = ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original'];
   const postersUrlsObject = poster_sizes.map(size => {
@@ -367,7 +364,9 @@ function getGenres(genre_ids) {
 
 // -------------KonradKonik End
 
-// MartaMajnusz - wyszukiwarka (F10) + biblioteka
+// MartaMajnusz - wyszukiwarka (F10)
+
+import { fetchGenresList, createCards, searchMovies } from './scripts/search.js';
 
 const search = document.querySelector('.search-form');
 const cardsList = document.querySelector('ul#cards-list');
@@ -375,6 +374,8 @@ let lastSearchTerm;
 
 search.addEventListener('submit', async ev => {
   ev.preventDefault();
+  const controlPagination = document.querySelector('ul#control-pagination-list');
+  controlPagination.innerHTML = ``;
   cardsList.innerHTML = ` `;
   const warning = document.querySelector(`p.warning`);
   warning.innerText = ``;
@@ -397,17 +398,8 @@ search.addEventListener('submit', async ev => {
     console.error('Wystąpił błąd:', error);
   }
 });
-async function fetchGenresList() {
-  const url = `https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=6bb894494c1a707618648b9164f393c2`;
-  try {
-    const response = await axios.get(url);
-    return response.data.genres;
-  } catch (error) {
-    console.error('Wystąpił błąd podczas pobierania listy gatunków:', error);
-    throw error;
-  }
-}
 
+// library
 // ----------------------------------------------------------------------------
 // wyszukiwarka
 async function searchMovies(searchTerm) {

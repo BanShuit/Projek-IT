@@ -24,7 +24,7 @@ body {
   margin: 15% auto; /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
   padding: 48px 20px 40px 20px;
 
-  display: block;
+  display: none;
   position: relative;
   width: 280px; /* Ustaw szerokość na 92% */
 }
