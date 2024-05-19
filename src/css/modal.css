@@ -7,6 +7,7 @@ body {
   z-index: 1; /* Ustaw indeks na pierwszym planie */
   left: 0;
   top: 0;
+  display: none;
   width: 100%; /* Ustaw szerokość na 100% ekranu */
   height: 100%; /* Ustaw wysokość na 100% ekranu */
   overflow: auto; /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
@@ -23,7 +24,6 @@ body {
   background-color: #fefefe; /* Tło modala */
   margin: 15% auto; /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
   padding: 48px 20px 40px 20px;
-
   display: none;
   position: relative;
   width: 280px; /* Ustaw szerokość na 92% */
