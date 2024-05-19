@@ -15,20 +15,25 @@ axios.defaults.headers.common['Authorization'] = AXIOS_AUTHORIZATION;
 const loader = document.querySelector('.loader');
 export function showLoader() {
   loader.style.display = 'block';
+  gallery.style.display = 'none';
+  paginationButtons.style.display = 'none';
 }
 export function hideLoader() {
   loader.style.display = 'none';
+  gallery.style.display = 'flex';
+  paginationButtons.style.display = 'flex';
 }
 // hideLoader(); // Ukrycie loadera na początku
 
 //DOM
 const homeButton = document.querySelector('span#logo');
 const gallery = document.querySelector('ul#cards-list');
+//Pagination
 const paginationButtons = document.querySelector('div#pagination-new');
 const pagination = document.querySelector('ul#pagination-new-list');
 const paginationButtonLeft = paginationButtons.querySelector('button#pagination-btn-left');
 const paginationButtonRight = paginationButtons.querySelector('button#pagination-btn-right');
-
+//-----------PaginationEnd
 //Listeners
 homeButton.addEventListener('click', ev => {
   ev.preventDefault();
@@ -67,12 +72,15 @@ function getMostPopularMovies(pageNumber) {
   if (pageNumber > 500) {
     pageNumber = 500;
   }
+  showLoader(); // Wyświetlenie loadera przed wyszukaniem filmów
   getMostPopularMoviesTmdbApi(pageNumber)
     .then(dataMovies => {
       renderMovies(dataMovies);
+      hideLoader(); // Ukrycie loadera po otrzymaniu odpowiedzi
     })
     .catch(error => {
       console.error(error);
+      hideLoader(); // Ukrycie loadera po otrzymaniu odpowiedzi
     });
 }
 /**
