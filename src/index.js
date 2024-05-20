@@ -4,33 +4,30 @@ import './sass/main.scss';
 //Import
 import axios from 'axios';
 // -------------KonradKonik
-//CreatePagination import niezbędny dla <script type="module">
-import { createPagination } from './index.js';
-window.createPagination = createPagination;
 //ApiKey
 const apiKey = '6bb894494c1a707618648b9164f393c2';
 const AXIOS_AUTHORIZATION =
   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YmI4OTQ0OTRjMWE3MDc2MTg2NDhiOTE2NGYzOTNjMiIsInN1YiI6IjVlZDdiZmY3ZTRiNTc2MDAyMDM3NjYzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kRGs0WRoomKwYXT7Mt8PNU2Zk6kAVasud5CyVVdf2mA';
 //Axios header - api key
 axios.defaults.headers.common['Authorization'] = AXIOS_AUTHORIZATION;
+
 // Loader - klaudia
-
 const loader = document.querySelector('.loader');
-
-function showLoader() {
+export function showLoader() {
   loader.style.display = 'block';
 }
-
-function hideLoader() {
+export function hideLoader() {
   loader.style.display = 'none';
 }
-
-hideLoader(); // Ukrycie loadera na początku
+// hideLoader(); // Ukrycie loadera na początku
 
 //DOM
 const homeButton = document.querySelector('span#logo');
 const gallery = document.querySelector('ul#cards-list');
-const controlPagination = document.querySelector('ul#control-pagination-list');
+const paginationButtons = document.querySelector('div#pagination-new');
+const pagination = document.querySelector('ul#pagination-new-list');
+const paginationButtonLeft = paginationButtons.querySelector('button#pagination-btn-left');
+const paginationButtonRight = paginationButtons.querySelector('button#pagination-btn-right');
 
 //Listeners
 homeButton.addEventListener('click', ev => {
@@ -38,6 +35,11 @@ homeButton.addEventListener('click', ev => {
   const pageNumber = 1;
   getMostPopularMovies(pageNumber);
 });
+//Global variables
+let noEventListener = true; //zmienna do funkcji paginacji
+
+//Start strony
+getMostPopularMovies(1);
 
 //Functions
 /**
@@ -135,13 +137,13 @@ function renderMovies(dataMovies) {
     .join('');
 
   gallery.insertAdjacentHTML('beforeend', filmsList);
-  if (controlPagination) {
-    createPagination(totalPages, currentPage, getMostPopularMovies);
+  if (createPaginationNew) {
+    createPaginationNew(totalPages, currentPage, getMostPopularMovies);
   }
 }
 
 /**
- *createPagination
+ *createPaginationNew
  ** Tworzy elementy paginacji i dodaje nasłuchiwacze zdarzeń dla kliknięć na te elementy.
  *
  * @param {number} totalPages - Całkowita liczba stron.
@@ -149,79 +151,104 @@ function renderMovies(dataMovies) {
  * @param {function(number): void} callback - Funkcja wywoływana po kliknięciu elementu paginacji, przyjmująca numer nowej strony.
  * @returns {string} HTML string z wygenerowanymi elementami paginacji.
  */
-export function createPagination(totalPages, page, callback) {
+function createPaginationNew(totalPages, page, callback) {
   let liTag = '';
   let currentPage;
   let active;
   let beforePage = page - 2;
   let afterPage = page + 2;
 
-  if (page > 1) {
-    liTag += `<li class="btn prev" data-page="${page - 1}"><svg width="16" height="16">
-                  <use href="../images/icons.svg#icon-arrow-right"></use>
-                </svg></li>`;
-  }
-
-  if (page > 3) {
-    liTag += `<li class="first numb" data-page="1"><span>1</span></li>`;
-    if (page > 4) {
-      liTag += `<li class="dots"><span>...</span></li>`;
-    }
-  }
-
-  if (page == totalPages) {
-    beforePage = beforePage - 1;
-  } else if (page == totalPages - 1) {
-    beforePage = beforePage;
-  }
-  if (page == 1) {
-    afterPage = afterPage + 1;
-  } else if (page == 2) {
-    afterPage = afterPage;
-  }
-
-  for (var plength = beforePage; plength <= afterPage; plength++) {
-    if (plength > totalPages) {
-      continue;
-    }
-    if (plength <= 0) {
-      continue;
-    }
-    if (page == plength) {
-      active = 'active';
-      currentPage = "id = 'pagination-current-page'";
+  if (page >= 1) {
+    paginationButtonLeft.dataset.page = `${page - 1}`;
+    if (page === 1) {
+      paginationButtonLeft.disabled = true;
     } else {
-      active = '';
-      currentPage = '';
+      paginationButtonLeft.disabled = false;
     }
-    liTag += `<li class="numb ${active}" ${currentPage} data-page="${plength}"><span>${plength}</span></li>`;
-  }
-
-  if (page < totalPages - 2) {
-    if (page < totalPages - 3) {
-      liTag += `<li class="dots"><span>...</span></li>`;
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      if (page > 3) {
+        liTag += `<li class="pagination-new-numb" data-page="1"><span>1</span></li>`;
+        if (page > 4) {
+          liTag += `<li class="pagination-new-dots">...</li>`;
+        }
+      }
     }
-    liTag += `<li class="last numb" data-page="${totalPages}"><span>${totalPages}</span></li>`;
-  }
 
-  if (page < totalPages) {
-    liTag += `<li class="btn next" data-page="${page + 1}"><svg width="16" height="16">
-          <use href="./images/icons.svg#icon-arrow-right"></use>
-        </svg></li>`;
-  }
+    if (page == totalPages) {
+      beforePage = beforePage - 1;
+    } else if (page == totalPages - 1) {
+      beforePage = beforePage;
+    }
+    if (page == 1) {
+      afterPage = afterPage + 1;
+    } else if (page == 2) {
+      afterPage = afterPage;
+    }
 
-  controlPagination.innerHTML = liTag;
+    for (var plength = beforePage; plength <= afterPage; plength++) {
+      if (plength > totalPages) {
+        continue;
+      }
+      if (plength <= 0) {
+        continue;
+      }
+      if (page == plength) {
+        active = 'active';
+        currentPage = "id = 'pagination-current-page'";
+      } else {
+        active = '';
+        currentPage = '';
+      }
+      liTag += `<li class="pagination-new-numb ${active}" ${currentPage} data-page="${plength}"><span>${plength}</span></li>`;
+    }
 
-  // Add event listeners
-  const paginationItems = controlPagination.querySelectorAll('li[data-page]');
-  paginationItems.forEach(item => {
-    item.addEventListener('click', event => {
-      const newPage = Number(event.currentTarget.getAttribute('data-page'));
-      callback(newPage);
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      if (page < totalPages - 2) {
+        if (page < totalPages - 3) {
+          liTag += `<li class="pagination-new-dots">...</li>`;
+        }
+        liTag += `<li class="pagination-new-last pagination-new-numb" data-page="${totalPages}"><span>${totalPages}</span></li>`;
+      }
+    }
+    if (page < totalPages) {
+      paginationButtonRight.dataset.page = `${page + 1}`;
+      paginationButtonRight.disabled = false;
+    } else if (page === totalPages) {
+      paginationButtonRight.disabled = true;
+    }
+    pagination.innerHTML = liTag;
+
+    // Add event listeners
+    const paginationItems = pagination.querySelectorAll('li[data-page]');
+    paginationItems.forEach(item => {
+      item.addEventListener('click', event => {
+        const newPage = Number(event.currentTarget.getAttribute('data-page'));
+        callback(newPage);
+      });
     });
-  });
 
-  return liTag;
+    if (noEventListener) {
+      paginationButtonLeft.addEventListener('click', event => {
+        const newPage = Number(event.currentTarget.getAttribute('data-page'));
+        if (newPage >= 1) {
+          callback(newPage);
+        }
+      });
+
+      paginationButtonRight.addEventListener('click', event => {
+        const newPage = Number(event.currentTarget.getAttribute('data-page'));
+        if (newPage <= totalPages) {
+          callback(newPage);
+        }
+      });
+      noEventListener = false;
+    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    return liTag;
+  }
 }
 
 /**
@@ -230,7 +257,7 @@ export function createPagination(totalPages, page, callback) {
  * @param {string} posterPath Endpoint ścieżki do pliku obrazka
  * @returns {Object[]} Tablica obiektów zawierających nazwę i URL różnych rozmiarów obrazka.
  */
-function getUrlSizePoster(posterPath) {
+export function getUrlSizePoster(posterPath) {
   const url = 'https://image.tmdb.org/t/p/';
   const poster_sizes = ['w92', 'w154', 'w185', 'w342', 'w500', 'w780', 'original'];
   const postersUrlsObject = poster_sizes.map(size => {
@@ -337,7 +364,9 @@ function getGenres(genre_ids) {
 
 // -------------KonradKonik End
 
-// MartaMajnusz - wyszukiwarka (F10) + biblioteka
+// MartaMajnusz - wyszukiwarka (F10)
+
+import { fetchGenresList, createCards, searchMovies } from './scripts/search.js';
 
 const search = document.querySelector('.search-form');
 const cardsList = document.querySelector('ul#cards-list');
@@ -345,10 +374,8 @@ let lastSearchTerm;
 
 search.addEventListener('submit', async ev => {
   ev.preventDefault();
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
+  const controlPagination = document.querySelector('ul#control-pagination-list');
+  controlPagination.innerHTML = ``;
   cardsList.innerHTML = ` `;
   const warning = document.querySelector(`p.warning`);
   warning.innerText = ``;
@@ -371,17 +398,8 @@ search.addEventListener('submit', async ev => {
     console.error('Wystąpił błąd:', error);
   }
 });
-async function fetchGenresList() {
-  const url = `https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=6bb894494c1a707618648b9164f393c2`;
-  try {
-    const response = await axios.get(url);
-    return response.data.genres;
-  } catch (error) {
-    console.error('Wystąpił błąd podczas pobierania listy gatunków:', error);
-    throw error;
-  }
-}
 
+// library
 // ----------------------------------------------------------------------------
 // wyszukiwarka
 async function searchMovies(searchTerm) {

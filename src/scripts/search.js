@@ -1,6 +1,9 @@
 // import './sass/main.scss';
 
 import axios from 'axios';
+import { hideLoader, showLoader } from '../index.js';
+// import { createPagination } from '../index.js';
+
 // ----------------------------------------------------------------------------
 // Funkcja pobierająca listę gatunków
 export async function fetchGenresList() {
@@ -30,15 +33,45 @@ export async function searchMovies(searchTerm) {
     throw error;
   }
 }
-
 // ----------------------------------------------------------------------------
 //tworzenie kart
+import { getUrlSizePoster } from '../index.js';
 export function createCards(dataMovies, genresList) {
   const gallery = document.querySelector('.cards-list');
+  gallery.innerHTML = null;
   dataMovies.forEach(element => {
+    // movie data
     const id = element.id;
-    const posterPath = element.poster_path;
+    const title = element.title;
+    // posters
+    let posterPath = element.poster_path;
+    console.log(posterPath);
+    let urlW154, urlW185, urlW342, urlW500, urlW780, urlOriginal;
+    if (posterPath === null) {
+      // posterPath = './images/no-image-available.jpg';
+      urlW154 = './src/images/no-image-available.jpg';
+      urlW185 = './src/images/no-image-available.jpg';
+      urlW342 = './src/images/no-image-available.jpg';
+      urlW500 = './src/images/no-image-available.jpg';
+      urlW780 = './src/images/no-image-available.jpg';
+      urlOriginal = './src/images/no-image-available.jpg';
+    } else {
+      urlSizePoster = getUrlSizePoster(posterPath);
+      baseW154 = urlSizePoster.find(obj => obj.name === 'w154');
+      urlW154 = baseW154.url;
+      baseW185 = urlSizePoster.find(obj => obj.name === 'w185');
+      urlW185 = baseW185.url;
+      baseW342 = urlSizePoster.find(obj => obj.name === 'w342');
+      urlW342 = baseW342.url;
+      baseW500 = urlSizePoster.find(obj => obj.name === 'w500');
+      urlW500 = baseW500.url;
+      baseW780 = urlSizePoster.find(obj => obj.name === 'w780');
+      urlW780 = baseW780.url;
+      baseOriginal = urlSizePoster.find(obj => obj.name === 'original');
+      urlOriginal = baseOriginal.url;
+    }
 
+    // genres
     const genreIds = element.genre_ids;
     const genreNames = [];
     genreIds.forEach(id => {
@@ -49,20 +82,35 @@ export function createCards(dataMovies, genresList) {
         genreNames.push('Unknown');
       }
     });
-
-    const title = element.title;
+    // year
     const releaseDate = element.release_date;
     const d = new Date(releaseDate);
-    let year = d.getFullYear();
-
+    let year;
+    if (releaseDate === NaN || releaseDate === 0 || releaseDate === ``) {
+      year = ``;
+    } else {
+      year = d.getFullYear();
+    }
+    // new card
     const card = document.createElement(`div`);
     card.classList.add('card');
     card.innerHTML = `
     <li>
   <div class="card" data-id="${id}">
     <div class="card-img">
-
-    <img src ="https://image.tmdb.org/t/p/original/${posterPath}"/></div>
+    <img class="card-img"
+                  alt="${title}"
+                  src="${urlW154}"
+                  srcset="
+                    ${urlW185} 185w,
+                    ${urlW342} 342w,
+                    ${urlW500} 500w,
+                    ${urlW780} 780w,
+                     ${urlOriginal} 2000w
+                  "
+                  sizes="(min-width: 1157px) 780px, (min-width: 768px) 500px, (max-width: 767px) 342px, 100vw"
+                />
+    </div>
     <div class="card-text">
       <p class="card-text-title">${title}</p>
       <p class="card-text-genre">${genreNames.join(', ')} | ${year}</p>

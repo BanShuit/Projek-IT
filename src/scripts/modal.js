@@ -45,6 +45,7 @@ function addToWatched(movie) {
 watchedBtn.onclick = function () {
   addToWatched(selectedMovie);
   console.log('Film dodany do obejrzanych:', selectedMovie);
+  // displayLocalStorageContent();
   displayLocalStorageContent();
 };
 
@@ -72,11 +73,13 @@ document.onkeydown = function (event) {
   }
 };
 
-<<<<<<< Updated upstream
+// // Otwarcie modala (dla przykładu, otwiera się automatycznie)
+// window.onload = function () {
+//   modal.style.display = 'block';
+// };
+
 document.body.addEventListener('click', function (event) {
-=======
 document.body.addEventListener('click', async function (event) {
->>>>>>> Stashed changes
   if (event.target.classList.contains('card-img')) {
     modal.style.display = 'block';
 
