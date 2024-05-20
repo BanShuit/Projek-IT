@@ -1,55 +1,73 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+
 .modal {
   /* Ukryj domyślnie modal */
-  position: fixed; /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
-  z-index: 1; /* Ustaw indeks na pierwszym planie */
+  position: fixed;
+  /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
+  z-index: 1;
+  /* Ustaw indeks na pierwszym planie */
   left: 0;
   top: 0;
   display: none;
-  width: 100%; /* Ustaw szerokość na 100% ekranu */
-  height: 100%; /* Ustaw wysokość na 100% ekranu */
-  overflow: auto; /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.4
-  ); /* Dodać efekt podmywania: czarny kolor z przezroczystością */
+  width: 100%;
+  /* Ustaw szerokość na 100% ekranu */
+  height: 100%;
+  /* Ustaw wysokość na 100% ekranu */
+  overflow: auto;
+  /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
+  background-color: rgba(0,
+      0,
+      0,
+      0.4);
+  /* Dodać efekt podmywania: czarny kolor z przezroczystością */
 }
 
 /* Styl dla zawartości modala */
 .modal-content {
-  background-color: #fefefe; /* Tło modala */
-  margin: 15% auto; /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
+  background-color: #fefefe;
+  /* Tło modala */
+  margin: 15% auto;
+  /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
   padding: 48px 20px 40px 20px;
   display: none;
   position: relative;
-  width: 280px; /* Ustaw szerokość na 92% */
+  width: 280px;
+  /* Ustaw szerokość na 92% */
   overflow: auto;
-  max-width: 90%; /* Zmniejsz szerokość do 90% szerokości ekranu */
-  max-height: 90vh; /* Ogranicz wysokość do 90% wysokości okna przeglądarki */
-  overflow-y: auto; /* Dodaj pionowy pasek przewijania */
+  max-width: 90%;
+  /* Zmniejsz szerokość do 90% szerokości ekranu */
+  max-height: 90vh;
+  /* Ogranicz wysokość do 90% wysokości okna przeglądarki */
+  overflow-y: auto;
+  /* Dodaj pionowy pasek przewijania */
 }
+
 img {
-  width: 240px; /* Ustaw szerokość obrazka */
+  width: 240px;
+  /* Ustaw szerokość obrazka */
   height: 357px;
-  border-radius: 5px; /*kurczę coś nie działa ten obrazek, jest przesunięty na lewo :/*/
+  border-radius: 5px;
+  /*kurczę coś nie działa ten obrazek, jest przesunięty na lewo :/*/
 }
+
 .movie-title {
   margin: 0px;
   font-size: 20px;
 }
+
 .modal-desc {
   margin-top: 20px;
 }
+
 .movie-details {
   justify-content: left;
   padding: 0%;
   display: flex;
   margin-top: 20px;
 }
+
 .movie-details-variables {
   list-style-type: none;
   padding: 0;
@@ -57,6 +75,7 @@ img {
   font-size: 12px;
   color: #8c8c8c;
 }
+
 .movie-details-values {
   list-style-type: none;
   padding: 0;
@@ -64,20 +83,24 @@ img {
   margin-left: 80px;
   font-size: 12px;
 }
+
 .movie-summary {
   font-size: 12px;
   font-weight: bold;
   line-height: 20px;
   margin-top: 20px;
 }
+
 .movie-summary p {
   margin: 0px;
   font-weight: 500 bold;
 }
+
 .movie-summary p:first-child {
   margin-bottom: 8px;
   line-height: 16px;
 }
+
 /* Styl dla przycisku zamykania */
 .close {
   color: #aaa;
@@ -109,6 +132,7 @@ img {
   border-radius: 5px;
   font-size: 12px;
 }
+
 .modal-button:first-of-type {
   margin-right: 20px;
 }
@@ -118,6 +142,7 @@ img {
   color: white;
   border: 1px solid #ff6b01;
 }
+
 .property-list {
   list-style: none;
   padding: 0;
@@ -126,15 +151,19 @@ img {
 
 .property-list li {
   display: flex;
-  margin-bottom: 8px; /*jak ustawić margin tylko pomiędzy elementami li?*/
+  margin-bottom: 8px;
+  /*jak ustawić margin tylko pomiędzy elementami li?*/
 }
+
 .property-list li:last-child {
-  margin-bottom: 0px; /* Dodaj margines tylko dla ostatniego elementu */
+  margin-bottom: 0px;
+  /* Dodaj margines tylko dla ostatniego elementu */
 }
 
 .property {
   font-weight: bold;
-  margin-right: 5px; /* Dodajemy odstęp między właściwością a wartością */
+  margin-right: 5px;
+  /* Dodajemy odstęp między właściwością a wartością */
   width: 152px;
   font-size: 12px;
   line-height: 16px;
@@ -159,6 +188,7 @@ img {
   width: 36px;
   color: white;
 }
+
 .value-slash {
   font-size: 12px;
   color: #8c8c8c;
@@ -169,56 +199,73 @@ img {
   body {
     font-family: 'Roboto', sans-serif;
   }
+
   .modal {
     /* Ukryj domyślnie modal */
-    position: fixed; /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
-    z-index: 1; /* Ustaw indeks na pierwszym planie */
+    position: fixed;
+    /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
+    z-index: 1;
+    /* Ustaw indeks na pierwszym planie */
     left: 0;
     top: 0;
-    width: 100%; /* Ustaw szerokość na 100% ekranu */
-    height: 100%; /* Ustaw wysokość na 100% ekranu */
-    overflow: auto; /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
-    background-color: rgba(
-      0,
-      0,
-      0,
-      0.4
-    ); /* Dodać efekt podmywania: czarny kolor z przezroczystością */
+    width: 100%;
+    /* Ustaw szerokość na 100% ekranu */
+    height: 100%;
+    /* Ustaw wysokość na 100% ekranu */
+    overflow: auto;
+    /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
+    background-color: rgba(0,
+        0,
+        0,
+        0.4);
+    /* Dodać efekt podmywania: czarny kolor z przezroczystością */
   }
 
   /* Styl dla zawartości modala */
   .modal-content {
-    background-color: #fefefe; /* Tło modala */
-    margin: 15% auto; /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
+    background-color: #fefefe;
+    /* Tło modala */
+    margin: 15% auto;
+    /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
     padding: 40px 72px 40px 36px;
 
     display: flex;
     position: relative;
-    width: 704px; /* Ustaw szerokość na 92% */
+    width: 704px;
+    /* Ustaw szerokość na 92% */
     overflow: auto;
-    max-width: 90%; /* Zmniejsz szerokość do 90% szerokości ekranu */
-    max-height: 90vh; /* Ogranicz wysokość do 90% wysokości okna przeglądarki */
-    overflow-y: auto; /* Dodaj pionowy pasek przewijania */
+    max-width: 90%;
+    /* Zmniejsz szerokość do 90% szerokości ekranu */
+    max-height: 90vh;
+    /* Ogranicz wysokość do 90% wysokości okna przeglądarki */
+    overflow-y: auto;
+    /* Dodaj pionowy pasek przewijania */
   }
+
   img {
-    width: 264px; /* Ustaw szerokość obrazka */
+    width: 264px;
+    /* Ustaw szerokość obrazka */
     height: 373.55px;
     border-radius: 5px;
   }
+
   .movie-title {
     margin: 0px;
     font-size: 20px;
   }
+
   .modal-desc {
     margin-left: 68px;
     margin-top: 0px;
   }
+
   .movie-details {
     justify-content: left;
     padding: 0%;
     display: flex;
     margin-top: 20px;
   }
+
   .movie-details-variables {
     list-style-type: none;
     padding: 0;
@@ -226,6 +273,7 @@ img {
     font-size: 12px;
     color: #8c8c8c;
   }
+
   .movie-details-values {
     list-style-type: none;
     padding: 0;
@@ -233,20 +281,24 @@ img {
     margin-left: 80px;
     font-size: 12px;
   }
+
   .movie-summary {
     font-size: 12px;
     font-weight: bold;
     line-height: 20px;
     margin-top: 20px;
   }
+
   .movie-summary p {
     margin: 0px;
     font-weight: 500 bold;
   }
+
   .movie-summary p:first-child {
     margin-bottom: 8px;
     line-height: 16px;
   }
+
   /* Styl dla przycisku zamykania */
   .close {
     color: #aaa;
@@ -278,6 +330,7 @@ img {
     border-radius: 5px;
     font-size: 12px;
   }
+
   .modal-button:first-of-type {
     margin-right: 15px;
   }
@@ -287,6 +340,7 @@ img {
     color: white;
     border: 1px solid #ff6b01;
   }
+
   .property-list {
     list-style: none;
     padding: 0;
@@ -295,15 +349,19 @@ img {
 
   .property-list li {
     display: flex;
-    margin-bottom: 8px; /*jak ustawić margin tylko pomiędzy elementami li?*/
+    margin-bottom: 8px;
+    /*jak ustawić margin tylko pomiędzy elementami li?*/
   }
+
   .property-list li:last-child {
-    margin-bottom: 0px; /* Dodaj margines tylko dla ostatniego elementu */
+    margin-bottom: 0px;
+    /* Dodaj margines tylko dla ostatniego elementu */
   }
 
   .property {
     font-weight: bold;
-    margin-right: 5px; /* Dodajemy odstęp między właściwością a wartością */
+    margin-right: 5px;
+    /* Dodajemy odstęp między właściwością a wartością */
     width: 108px;
     font-size: 12px;
     line-height: 16px;
@@ -328,66 +386,84 @@ img {
     width: 36px;
     color: white;
   }
+
   .value-slash {
     font-size: 12px;
     color: #8c8c8c;
     font-weight: normal;
   }
 }
+
 @media (min-width: 901px) {
   body {
     font-family: 'Roboto', sans-serif;
   }
+
   .modal {
     /* Ukryj domyślnie modal */
     /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
-    z-index: 1; /* Ustaw indeks na pierwszym planie */
+    z-index: 1;
+    /* Ustaw indeks na pierwszym planie */
     left: 0;
-    width: 100%; /* Ustaw szerokość na 100% ekranu */
-    height: 100%; /* Ustaw wysokość na 100% ekranu */
-    overflow: auto; /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
-    background-color: rgba(
-      0,
-      0,
-      0,
-      0.4
-    ); /* Dodać efekt podmywania: czarny kolor z przezroczystością */
+    width: 100%;
+    /* Ustaw szerokość na 100% ekranu */
+    height: 100%;
+    /* Ustaw wysokość na 100% ekranu */
+    overflow: auto;
+    /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
+    background-color: rgba(0,
+        0,
+        0,
+        0.4);
+    /* Dodać efekt podmywania: czarny kolor z przezroczystością */
     overflow: hidden;
   }
 
   /* Styl dla zawartości modala */
   .modal-content {
-    background-color: #fefefe; /* Tło modala */
-    margin: 15% auto; /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
+    background-color: #fefefe;
+    /* Tło modala */
+    margin: 15% auto;
+    /*Czy wysokośc od góry powinna być stała, wyznaczona przez px? */
     padding: 40px 12px;
-    width: 806px; /* ewentualnie zmienić na procenty?? */
+    width: 806px;
+    /* ewentualnie zmienić na procenty?? */
     display: flex;
     position: relative;
     top: -25%;
     overflow: auto;
-    max-width: 90%; /* Zmniejsz szerokość do 90% szerokości ekranu */
-    max-height: 90vh; /* Ogranicz wysokość do 90% wysokości okna przeglądarki */
-    overflow-y: auto; /* Dodaj pionowy pasek przewijania */
+    max-width: 90%;
+    /* Zmniejsz szerokość do 90% szerokości ekranu */
+    max-height: 90vh;
+    /* Ogranicz wysokość do 90% wysokości okna przeglądarki */
+    overflow-y: auto;
+    /* Dodaj pionowy pasek przewijania */
   }
+
   img {
-    width: 375px; /* Ustaw szerokość obrazka */
+    width: 375px;
+    /* Ustaw szerokość obrazka */
     height: auto;
     border-radius: 5px;
   }
+
   .movie-title {
     margin: 0px;
     font-size: 30px;
   }
+
   .modal-desc {
     margin-left: 16px;
     margin-top: 0px;
   }
+
   .movie-details {
     justify-content: left;
     padding: 0%;
     display: flex;
     margin-top: 20px;
   }
+
   .movie-details-variables {
     list-style-type: none;
     padding: 0;
@@ -395,6 +471,7 @@ img {
     font-size: 12px;
     color: #8c8c8c;
   }
+
   .movie-details-values {
     list-style-type: none;
     padding: 0;
@@ -402,20 +479,24 @@ img {
     margin-left: 80px;
     font-size: 12px;
   }
+
   .movie-summary {
     font-size: 12px;
     font-weight: bold;
     line-height: 20px;
     margin-top: 20px;
   }
+
   .movie-summary p {
     margin: 0px;
     font-weight: 500 bold;
   }
+
   .movie-summary p:first-child {
     margin-bottom: 8px;
     line-height: 16px;
   }
+
   /* Styl dla przycisku zamykania */
   .close {
     color: #aaa;
@@ -445,6 +526,7 @@ img {
     border-radius: 5px;
     font-size: 12px;
   }
+
   .modal-button:first-of-type {
     margin-left: 24px;
   }
@@ -454,6 +536,7 @@ img {
     color: white;
     border: 1px solid #ff6b01;
   }
+
   .property-list {
     list-style: none;
     padding: 0;
@@ -462,15 +545,19 @@ img {
 
   .property-list li {
     display: flex;
-    margin-bottom: 8px; /*jak ustawić margin tylko pomiędzy elementami li?*/
+    margin-bottom: 8px;
+    /*jak ustawić margin tylko pomiędzy elementami li?*/
   }
+
   .property-list li:last-child {
-    margin-bottom: 0px; /* Dodaj margines tylko dla ostatniego elementu */
+    margin-bottom: 0px;
+    /* Dodaj margines tylko dla ostatniego elementu */
   }
 
   .property {
     font-weight: bold;
-    margin-right: 5px; /* Dodajemy odstęp między właściwością a wartością */
+    margin-right: 5px;
+    /* Dodajemy odstęp między właściwością a wartością */
     width: 152px;
     font-size: 12px;
     line-height: 16px;
@@ -495,6 +582,7 @@ img {
     width: 36px;
     color: white;
   }
+
   .value-slash {
     font-size: 12px;
     color: #8c8c8c;
