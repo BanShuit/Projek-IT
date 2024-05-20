@@ -47,29 +47,19 @@ export function createCards(dataMovies, genresList) {
     let posterPath = element.poster_path;
     console.log(posterPath);
     let urlW154, urlW185, urlW342, urlW500, urlW780, urlOriginal;
-    if (posterPath === null) {
-      // posterPath = './images/no-image-available.jpg';
-      urlW154 = './src/images/no-image-available.jpg';
-      urlW185 = './src/images/no-image-available.jpg';
-      urlW342 = './src/images/no-image-available.jpg';
-      urlW500 = './src/images/no-image-available.jpg';
-      urlW780 = './src/images/no-image-available.jpg';
-      urlOriginal = './src/images/no-image-available.jpg';
-    } else {
-      urlSizePoster = getUrlSizePoster(posterPath);
-      baseW154 = urlSizePoster.find(obj => obj.name === 'w154');
-      urlW154 = baseW154.url;
-      baseW185 = urlSizePoster.find(obj => obj.name === 'w185');
-      urlW185 = baseW185.url;
-      baseW342 = urlSizePoster.find(obj => obj.name === 'w342');
-      urlW342 = baseW342.url;
-      baseW500 = urlSizePoster.find(obj => obj.name === 'w500');
-      urlW500 = baseW500.url;
-      baseW780 = urlSizePoster.find(obj => obj.name === 'w780');
-      urlW780 = baseW780.url;
-      baseOriginal = urlSizePoster.find(obj => obj.name === 'original');
-      urlOriginal = baseOriginal.url;
-    }
+    urlSizePoster = getUrlSizePoster(posterPath);
+    baseW154 = urlSizePoster.find(obj => obj.name === 'w154');
+    urlW154 = baseW154.url;
+    baseW185 = urlSizePoster.find(obj => obj.name === 'w185');
+    urlW185 = baseW185.url;
+    baseW342 = urlSizePoster.find(obj => obj.name === 'w342');
+    urlW342 = baseW342.url;
+    baseW500 = urlSizePoster.find(obj => obj.name === 'w500');
+    urlW500 = baseW500.url;
+    baseW780 = urlSizePoster.find(obj => obj.name === 'w780');
+    urlW780 = baseW780.url;
+    baseOriginal = urlSizePoster.find(obj => obj.name === 'original');
+    urlOriginal = baseOriginal.url;
 
     // genres
     const genreIds = element.genre_ids;

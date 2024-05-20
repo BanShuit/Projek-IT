@@ -1,26 +1,43 @@
 // owner: Marta Majnusz
 
-//tworzenie kart w bibliotece
+//tworzenie kart w bibliotece - tu są zmiany
 export function showLibrary(savedCards) {
   const gallery = document.querySelector('.cards-list');
   gallery.innerHTML = null;
 
   savedCards.forEach(el => {
     const card = document.createElement(`div`);
-    const title = el.MovieTitle;
-    const imgSrc = el.imgSrc;
-    console.log(imgSrc);
-    const movieGenre = el.MovieGenre;
+    const id = el.movieId;
+    const title = el.movieTitle;
+    const urlW154 = el.urlW154;
+    const urlW185 = el.urlW185;
+    const urlW342 = el.urlW342;
+    const urlW500 = el.urlW500;
+    const urlW780 = el.urlW780;
+    const urlOriginal = el.urlOriginal;
+    const genreAndYear = el.movieGenreAndYear;
+    console.log(el.genreAndYear);
     card.classList.add('card');
     card.innerHTML = `
         <li>
-      <div class="card" data-id="id">
+      <div class="card" data-id="${id}">
         <div class="card-img">
-        <img class="card-img" alt="${title}" src="${imgSrc}"/>
+        <img class="card-img"
+        alt="${title}"
+        src="${urlW154}"
+        srcset="
+          ${urlW185} 185w,
+          ${urlW342} 342w,
+          ${urlW500} 500w,
+          ${urlW780} 780w,
+           ${urlOriginal} 2000w
+        "
+        sizes="(min-width: 1157px) 780px, (min-width: 768px) 500px, (max-width: 767px) 342px, 100vw"
+      />
         </div>
         <div class="card-text">
           <p class="card-text-title">${title}</p>
-          <p class="card-text-genre">${movieGenre}</p>
+          <p class="card-text-genre">${genreAndYear}</p>
         </div>
       </div>
     </li>
