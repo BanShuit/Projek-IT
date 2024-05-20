@@ -345,6 +345,10 @@ let lastSearchTerm;
 
 search.addEventListener('submit', async ev => {
   ev.preventDefault();
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   cardsList.innerHTML = ` `;
   const warning = document.querySelector(`p.warning`);
   warning.innerText = ``;

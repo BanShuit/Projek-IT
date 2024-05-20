@@ -27,6 +27,10 @@ body {
   display: block;
   position: relative;
   width: 280px; /* Ustaw szerokość na 92% */
+  overflow: auto;
+  max-width: 90%; /* Zmniejsz szerokość do 90% szerokości ekranu */
+  max-height: 90vh; /* Ogranicz wysokość do 90% wysokości okna przeglądarki */
+  overflow-y: auto; /* Dodaj pionowy pasek przewijania */
 }
 img {
   width: 240px; /* Ustaw szerokość obrazka */
@@ -95,7 +99,7 @@ img {
 }
 
 /* Dodatkowy styl dla przycisków */
-button {
+.modal-button {
   padding: 14px 9px;
   margin-top: 20px;
 
@@ -105,11 +109,11 @@ button {
   border-radius: 5px;
   font-size: 12px;
 }
-button:first-of-type {
+.modal-button:first-of-type {
   margin-right: 20px;
 }
 
-button:hover {
+.modal-button:hover {
   background-color: #ff6b01;
   color: white;
   border: 1px solid #ff6b01;
@@ -191,6 +195,10 @@ button:hover {
     display: flex;
     position: relative;
     width: 704px; /* Ustaw szerokość na 92% */
+    overflow: auto;
+    max-width: 90%; /* Zmniejsz szerokość do 90% szerokości ekranu */
+    max-height: 90vh; /* Ogranicz wysokość do 90% wysokości okna przeglądarki */
+    overflow-y: auto; /* Dodaj pionowy pasek przewijania */
   }
   img {
     width: 264px; /* Ustaw szerokość obrazka */
@@ -260,7 +268,7 @@ button:hover {
   }
 
   /* Dodatkowy styl dla przycisków */
-  button {
+  .modal-button {
     padding: 14px 9px;
     margin-top: 20px;
 
@@ -270,11 +278,11 @@ button:hover {
     border-radius: 5px;
     font-size: 12px;
   }
-  button:first-of-type {
+  .modal-button:first-of-type {
     margin-right: 15px;
   }
 
-  button:hover {
+  .modal-button:hover {
     background-color: #ff6b01;
     color: white;
     border: 1px solid #ff6b01;
@@ -332,10 +340,9 @@ button:hover {
   }
   .modal {
     /* Ukryj domyślnie modal */
-    position: fixed; /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
+    /* Modal będzie trzymał swoje miejsce, niezależnie od przewijania strony */
     z-index: 1; /* Ustaw indeks na pierwszym planie */
     left: 0;
-    top: 0;
     width: 100%; /* Ustaw szerokość na 100% ekranu */
     height: 100%; /* Ustaw wysokość na 100% ekranu */
     overflow: auto; /* Dodaj paski przewijania, jeśli zawartość jest większa niż ekran */
@@ -345,6 +352,7 @@ button:hover {
       0,
       0.4
     ); /* Dodać efekt podmywania: czarny kolor z przezroczystością */
+    overflow: hidden;
   }
 
   /* Styl dla zawartości modala */
@@ -355,6 +363,11 @@ button:hover {
     width: 806px; /* ewentualnie zmienić na procenty?? */
     display: flex;
     position: relative;
+    top: -25%;
+    overflow: auto;
+    max-width: 90%; /* Zmniejsz szerokość do 90% szerokości ekranu */
+    max-height: 90vh; /* Ogranicz wysokość do 90% wysokości okna przeglądarki */
+    overflow-y: auto; /* Dodaj pionowy pasek przewijania */
   }
   img {
     width: 375px; /* Ustaw szerokość obrazka */
@@ -422,7 +435,7 @@ button:hover {
   }
 
   /* Dodatkowy styl dla przycisków */
-  button {
+  .modal-button {
     padding: 10px 20px;
     margin-top: 20px;
     margin-left: 15px;
@@ -432,11 +445,11 @@ button:hover {
     border-radius: 5px;
     font-size: 12px;
   }
-  button:first-of-type {
+  .modal-button:first-of-type {
     margin-left: 24px;
   }
 
-  button:hover {
+  .modal-button:hover {
     background-color: #ff6b01;
     color: white;
     border: 1px solid #ff6b01;
