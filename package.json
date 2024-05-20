@@ -5,7 +5,7 @@
   "homepage": "https://BanShuit.github.io/Projek-IT/",
   "scripts": {
     "build": "parcel build src/*.html --public-url /Projek-IT/",
-    "dev": "parcel src/*.html --public-url /Projek-IT/ --port 3000"
+    "dev": "parcel src/*.html --public-url /Projek-IT/"
   },
   "repository": {
     "type": "git",
