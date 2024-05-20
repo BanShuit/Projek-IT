@@ -78,7 +78,7 @@ document.onkeydown = function (event) {
 //   modal.style.display = 'block';
 // };
 
-document.body.addEventListener('click', function (event) {
+// document.body.addEventListener('click', function (event) {
 document.body.addEventListener('click', async function (event) {
   if (event.target.classList.contains('card-img')) {
     modal.style.display = 'block';
