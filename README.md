@@ -29,9 +29,9 @@ na GitHub Pages, w gałąź `gh-pages`, za kazdym razem jeśli zostaną wprowadz
 `build`, zmieniając `nazwe_uzytkownika` i `nazwe_repozytorium` na swoje.
 
 ```json
-"homepage": "https://nazwa_uzytkownika.github.io/nazwa_repozytorium",
+"homepage": "https://banshuit.github.io/Projek-IT/",
 "scripts": {
-  "build": "parcel build src/*.html --public-url /nazwa_repozytorium/"
+  "build": "parcel build src/*.html --public-url /Projek-IT/"
 },
 ```
 
