@@ -187,13 +187,13 @@
     margin: 60px auto;
   }
 
-  .pagination-new-dots {
-    display: block;
-    padding-bottom: 8px;
-    cursor: default;
-    user-select: none;
-    width: auto;
-  }
-}
+    .pagination-new-dots {
+      display: flex;
+      padding-bottom: 8px;
+      cursor: default;
+      user-select: none;
+      width: auto;
+    }
+    }
 
 /* ------------ End Pagination Control */
