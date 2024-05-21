@@ -1,5 +1,5 @@
 # parcel-project-template
-
+Link do strony https://banshuit.github.io/Projek-IT/
 ## Zalezności
 
 Na komputerze musi być zainstalowana LTS-wersja [Node.js](https://nodejs.org/en/).
