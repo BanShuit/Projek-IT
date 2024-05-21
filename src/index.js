@@ -37,6 +37,7 @@ const paginationButtonRight = paginationButtons.querySelector('button#pagination
 //Listeners
 homeButton.addEventListener('click', ev => {
   ev.preventDefault();
+  paginationButtons.style.display = 'flex';
   const pageNumber = 1;
   getMostPopularMovies(pageNumber);
 });
@@ -382,23 +383,22 @@ let lastSearchTerm;
 
 search.addEventListener('submit', async ev => {
   ev.preventDefault();
-
   cardsList.innerHTML = ` `;
   const warning = document.querySelector(`p.warning`);
   warning.innerText = ``;
   const searchTerm = ev.currentTarget.elements.searchQuery.value;
   lastSearchTerm = searchTerm;
-
   try {
     const data = await searchMovies(lastSearchTerm);
     const dataMovies = data.results;
     const genresList = await fetchGenresList();
-
     if (searchTerm === lastSearchTerm) {
       if (data.results.length === 0) {
         warning.innerText = `Search result not successful. Enter the correct movie name and try again.`;
+        paginationButtons.style.display = 'none';
       } else {
         createCards(dataMovies, genresList);
+        paginationButtons.style.display = 'none';
       }
     }
   } catch (error) {
