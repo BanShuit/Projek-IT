@@ -1,8 +1,5 @@
-// import './sass/main.scss';
-
-import axios from 'axios';
+// import axios from 'axios';
 import { hideLoader, showLoader } from '../index.js';
-// import { createPagination } from '../index.js';
 
 // ----------------------------------------------------------------------------
 // Funkcja pobierająca listę gatunków
@@ -47,20 +44,30 @@ export function createCards(dataMovies, genresList) {
     let posterPath = element.poster_path;
     console.log(posterPath);
     let urlW154, urlW185, urlW342, urlW500, urlW780, urlOriginal;
-    urlSizePoster = getUrlSizePoster(posterPath);
-    baseW154 = urlSizePoster.find(obj => obj.name === 'w154');
-    urlW154 = baseW154.url;
-    baseW185 = urlSizePoster.find(obj => obj.name === 'w185');
-    urlW185 = baseW185.url;
-    baseW342 = urlSizePoster.find(obj => obj.name === 'w342');
-    urlW342 = baseW342.url;
-    baseW500 = urlSizePoster.find(obj => obj.name === 'w500');
-    urlW500 = baseW500.url;
-    baseW780 = urlSizePoster.find(obj => obj.name === 'w780');
-    urlW780 = baseW780.url;
-    baseOriginal = urlSizePoster.find(obj => obj.name === 'original');
-    urlOriginal = baseOriginal.url;
-
+    const noImageUrl = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
+    console.log(noImageUrl);
+    if (posterPath === null) {
+      urlW154 = noImageUrl;
+      urlW185 = noImageUrl;
+      urlW342 = noImageUrl;
+      urlW500 = noImageUrl;
+      urlW780 = noImageUrl;
+      urlOriginal = noImageUrl;
+    } else {
+      urlSizePoster = getUrlSizePoster(posterPath);
+      baseW154 = urlSizePoster.find(obj => obj.name === 'w154');
+      urlW154 = baseW154.url;
+      baseW185 = urlSizePoster.find(obj => obj.name === 'w185');
+      urlW185 = baseW185.url;
+      baseW342 = urlSizePoster.find(obj => obj.name === 'w342');
+      urlW342 = baseW342.url;
+      baseW500 = urlSizePoster.find(obj => obj.name === 'w500');
+      urlW500 = baseW500.url;
+      baseW780 = urlSizePoster.find(obj => obj.name === 'w780');
+      urlW780 = baseW780.url;
+      baseOriginal = urlSizePoster.find(obj => obj.name === 'original');
+      urlOriginal = baseOriginal.url;
+    }
     // genres
     const genreIds = element.genre_ids;
     const genreNames = [];

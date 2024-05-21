@@ -36,6 +36,16 @@ body {
   letter-spacing: 0.03em;
 }
 
+.footer-link {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.footer-text.footer-link:hover {
+  color: #FF6B08;
+  text-decoration: none;
+}
+
 .footer {
   display: flex;
   flex-direction: column;
